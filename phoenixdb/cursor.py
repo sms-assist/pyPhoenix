@@ -19,14 +19,13 @@ import datetime
 from decimal import Decimal
 from phoenixdb.types import Binary
 from phoenixdb.errors import OperationalError, NotSupportedError, ProgrammingError
+from common_pb2 import ColumnMetaData
 
 __all__ = ['Cursor', 'ColumnDescription']
 
 logger = logging.getLogger(__name__)
 
 
-ColumnDescription = collections.namedtuple('ColumnDescription', 'name type_code display_size internal_size precision scale null_ok')
-"""Named tuple for representing results from :attr:`Cursor.description`."""
 
 
 def time_from_java_sql_time(n):
@@ -138,15 +137,14 @@ class Cursor(object):
         if self._signature is None:
             return None
         description = []
-        for column in self._signature['columns']:
-            description.append(ColumnDescription(
-                column['columnName'],
-                column['type']['name'],
-                column['displaySize'],
-                None,
-                column['precision'],
-                column['scale'],
-                bool(column['nullable']),
+        for column in self._signature.columns:
+            description.append(ColumnMetaData(
+                column_name=column.columnName,
+                type=column.type,
+                display_size=column.displaySize,
+                precision=column.precision,
+                scale=column.scale,
+                nullable=column.nullable,
             ))
         return description
 
@@ -162,47 +160,47 @@ class Cursor(object):
         if signature is None:
             return
         identity = lambda value: value
-        for i, column in enumerate(signature['columns']):
-            if column['columnClassName'] == 'java.math.BigDecimal':
+        for i, column in enumerate(signature.columns):
+            if column.column_class_name == 'java.math.BigDecimal':
                 self._column_data_types.append((i, Decimal))
-            elif column['columnClassName'] == 'java.lang.Float' or column['columnClassName'] == 'java.lang.Double':
+            elif column.column_class_name == 'java.lang.Float' or column.column_class_name == 'java.lang.Double':
                 self._column_data_types.append((i, float))
-            elif column['columnClassName'] == 'java.sql.Time':
+            elif column.column_class_name == 'java.sql.Time':
                 self._column_data_types.append((i, time_from_java_sql_time))
-            elif column['columnClassName'] == 'java.sql.Date':
+            elif column.column_class_name == 'java.sql.Date':
                 self._column_data_types.append((i, date_from_java_sql_date))
-            elif column['columnClassName'] == 'java.sql.Timestamp':
+            elif column.column_class_name == 'java.sql.Timestamp':
                 self._column_data_types.append((i, datetime_from_java_sql_timestamp))
-            elif column['type']['name'] == 'BINARY':
+            elif column.type.name == 'BINARY':
                 self._column_data_types.append((i, base64.b64decode))
-        for parameter in signature['parameters']:
-            if parameter['className'] == 'java.math.BigDecimal':
+        for parameter in signature.parameters:
+            if parameter.class_name == 'java.math.BigDecimal':
                 self._parameter_data_types.append(('NUMBER', None))
-            elif parameter['className'] == 'java.lang.Float':
+            elif parameter.class_name == 'java.lang.Float':
                 self._parameter_data_types.append(('FLOAT', None))
-            elif parameter['className'] == 'java.lang.Double':
+            elif parameter.class_name == 'java.lang.Double':
                 self._parameter_data_types.append(('DOUBLE', None))
-            elif parameter['className'] == 'java.lang.Long':
+            elif parameter.class_name == 'java.lang.Long':
                 self._parameter_data_types.append(('LONG', None))
-            elif parameter['className'] == 'java.lang.Integer':
+            elif parameter.class_name == 'java.lang.Integer':
                 self._parameter_data_types.append(('INTEGER', None))
-            elif parameter['className'] == 'java.lang.Short':
+            elif parameter.class_name == 'java.lang.Short':
                 self._parameter_data_types.append(('SHORT', None))
-            elif parameter['className'] == 'java.lang.Byte':
+            elif parameter.class_name == 'java.lang.Byte':
                 self._parameter_data_types.append(('BYTE', None))
-            elif parameter['className'] == 'java.lang.Boolean':
+            elif parameter.class_name == 'java.lang.Boolean':
                 self._parameter_data_types.append(('BOOLEAN', None))
-            elif parameter['className'] == 'java.lang.String':
+            elif parameter.class_name == 'java.lang.String':
                 self._parameter_data_types.append(('STRING', None))
-            elif parameter['className'] == 'java.sql.Time':
+            elif parameter.class_name == 'java.sql.Time':
                 self._parameter_data_types.append(('JAVA_SQL_TIME', time_to_java_sql_time))
-            elif parameter['className'] == 'java.sql.Date':
+            elif parameter.class_name == 'java.sql.Date':
                 self._parameter_data_types.append(('JAVA_SQL_DATE', date_to_java_sql_date))
-            elif parameter['className'] == 'java.sql.Timestamp':
+            elif parameter.class_name == 'java.sql.Timestamp':
                 self._parameter_data_types.append(('JAVA_SQL_TIMESTAMP', datetime_to_java_sql_timestamp))
-            elif parameter['className'] == '[B':
+            elif parameter.class_name == '[B':
                 self._parameter_data_types.append(('BYTE_STRING', Binary))
-            #elif parameter['className'] == 'org.apache.phoenix.schema.types.PhoenixArray':
+            #elif parameter.class_name == 'org.apache.phoenix.schema.types.PhoenixArray':
             #    self._parameter_data_types.append(('ARRAY', None))
             else:
                 self._parameter_data_types.append(('OBJECT', None))
@@ -222,13 +220,13 @@ class Cursor(object):
         self._frame = frame
         self._pos = None
         if frame is not None:
-            if frame['rows']:
+            if frame.rows:
                 self._pos = 0
-            elif not frame['done']:
+            elif not frame.done:
                 raise InternalError('got an empty frame, but the statement is not done yet')
 
     def _fetch_next_frame(self):
-        offset = self._frame['offset'] + len(self._frame['rows'])
+        offset = self._frame.offset + len(self._frame.rows)
         frame = self._connection._client.fetch(self._connection._id, self._id,
             offset=offset, fetchMaxRowCount=self.itersize)
         self._set_frame(frame)
@@ -236,11 +234,11 @@ class Cursor(object):
     def _process_results(self, results):
         if results:
             result = results[0]
-            if result['ownStatement']:
-                self._set_id(result['statementId'])
-            self._set_signature(result['signature'])
-            self._set_frame(result['firstFrame'])
-            self._updatecount = result['updateCount']
+            if result.own_statement:
+                self._set_id(result.statement_id)
+            self._set_signature(result.signature)
+            self._set_frame(result.first_frame)
+            self._updatecount = result.update_count
 
     def execute(self, operation, parameters=None):
         if self._closed:
@@ -256,8 +254,8 @@ class Cursor(object):
         else:
             statement = self._connection._client.prepare(self._connection._id,
                 operation, maxRowCount=self.itersize)
-            self._set_id(statement['id'])
-            self._set_signature(statement['signature'])
+            self._set_id(statement.id)
+            self._set_signature(statement.signature)
             if self._connection._client.supportsExecute():
                 results = self._connection._client.execute(self._connection._id, self._id,
                     self._transform_parameters(parameters),
@@ -277,8 +275,8 @@ class Cursor(object):
         self._set_frame(None)
         statement = self._connection._client.prepare(self._connection._id,
             operation, maxRowCount=0)
-        self._set_id(statement['id'])
-        self._set_signature(statement['signature'])
+        self._set_id(statement.id)
+        self._set_signature(statement.signature)
         for parameters in seq_of_parameters:
             if self._connection._client.supportsExecute():
                 self._connection._client.execute(self._connection._id, self._id,
@@ -295,12 +293,12 @@ class Cursor(object):
             raise ProgrammingError('no select statement was executed')
         if self._pos is None:
             return None
-        rows = self._frame['rows']
+        rows = self._frame.rows
         row = rows[self._pos]
         self._pos += 1
         if self._pos >= len(rows):
             self._pos = None
-            if not self._frame['done']:
+            if not self._frame.done:
                 self._fetch_next_frame()
         for i, data_type in self._column_data_types:
             value = row[i]
@@ -360,5 +358,5 @@ class Cursor(object):
         row indexed by :attr:`rownumber` in that sequence.
         """
         if self._frame is not None and self._pos is not None:
-            return self._frame['offset'] + self._pos
+            return self._frame.offset + self._pos
         return self._pos

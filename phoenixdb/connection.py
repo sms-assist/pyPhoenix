@@ -18,6 +18,7 @@ import weakref
 from phoenixdb import errors
 from phoenixdb.cursor import Cursor
 from phoenixdb.errors import OperationalError, NotSupportedError, ProgrammingError
+from common_pb2 import ConnectionProperties
 
 __all__ = ['Connection']
 
@@ -109,14 +110,16 @@ class Connection(object):
         :param readonly:
             Switch the connection to read-only mode.
         """
-        props = {}
+        props = conn_props = ConnectionProperties(has_auto_commit=False, has_read_only=False)
         if autocommit is not None:
-            props['autoCommit'] = bool(autocommit)
+            props.auto_commit = bool(autocommit)
+            props.has_auto_commit = True
         if readonly is not None:
-            props['readOnly'] = bool(readonly)
+            props.read_only = bool(readonly)
+            props.has_read_only = True
         props = self._client.connectionSync(self._id, props)
-        self._autocommit = props['autoCommit']
-        self._readonly = props['readOnly']
+        self._autocommit = props.auto_commit
+        self._readonly = props.read_only
 
     @property
     def autocommit(self):
@@ -127,8 +130,8 @@ class Connection(object):
     def autocommit(self, value):
         if self._closed:
             raise ProgrammingError('the connection is already closed')
-        props = self._client.connectionSync(self._id, {'autoCommit': bool(value)})
-        self._autocommit = props['autoCommit']
+        props = self._client.connectionSync(self._id, {'auto_commit': bool(value)})
+        self._autocommit = props['auto_commit']
 
     @property
     def readonly(self):
@@ -139,8 +142,8 @@ class Connection(object):
     def readonly(self, value):
         if self._closed:
             raise ProgrammingError('the connection is already closed')
-        props = self._client.connectionSync(self._id, {'readOnly': bool(value)})
-        self._readonly = props['readOnly']
+        props = self._client.connectionSync(self._id, {'read_only': bool(value)})
+        self._readonly = props['read_only']
 
 
 for name in errors.__all__:
