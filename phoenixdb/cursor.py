@@ -171,8 +171,11 @@ class Cursor(object):
                 self._column_data_types.append((i, date_from_java_sql_date))
             elif column.column_class_name == 'java.sql.Timestamp':
                 self._column_data_types.append((i, datetime_from_java_sql_timestamp))
+            elif column.column_class_name == 'java.lang.String':
+                self._column_data_types.append((i, str))
             elif column.type.name == 'BINARY':
                 self._column_data_types.append((i, base64.b64decode))
+
         for parameter in signature.parameters:
             if parameter.class_name == 'java.math.BigDecimal':
                 self._parameter_data_types.append(('NUMBER', None))
@@ -289,6 +292,7 @@ class Cursor(object):
                     fetchMaxRowCount=0)
 
     def fetchone(self):
+        result_row = []
         if self._frame is None:
             raise ProgrammingError('no select statement was executed')
         if self._pos is None:
@@ -301,10 +305,12 @@ class Cursor(object):
             if not self._frame.done:
                 self._fetch_next_frame()
         for i, data_type in self._column_data_types:
-            value = row[i]
+            value = row.value[i]
             if value is not None:
-                row[i] = data_type(value)
-        return row
+                result_row.append(data_type(value.scalar_value.string_value))
+            else:
+                result_row.append(None)
+        return result_row
 
     def fetchmany(self, size=None):
         if size is None:
