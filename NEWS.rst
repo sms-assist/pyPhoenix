@@ -1,5 +1,11 @@
 Changelog
 =========
+Version 0.5
+-----------
+
+- add protobuf of Phoenix 4.8.
+- delete retrocompatibility
+- delete json
 
 Version 0.4
 -----------

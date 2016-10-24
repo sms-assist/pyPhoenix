@@ -12,16 +12,16 @@ def readme():
     with open('README.rst') as f:
         return f.read()
 
-version = "0.4"
+version = "0.5"
 
 setup(
     name="phoenixdb",
     version=version,
     description="Phoenix database adapter for Python",
     long_description=readme(),
-    author="Lukas Lalinsky",
-    author_email="lukas@oxygene.sk",
-    url="https://bitbucket.org/lalinsky/python-phoenixdb",
+    author="Dimitri Capitaine",
+    author_email="grytes29@gmail.com",
+    url="https://github.com/Pirionfr/python-phoenixdb",
     license="Apache 2",
     packages=find_packages(),
     include_package_data=True,

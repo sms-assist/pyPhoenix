@@ -13,13 +13,12 @@
 # limitations under the License.
 
 import logging
-import collections
 import base64
 import datetime
 from decimal import Decimal
 from phoenixdb.types import Binary
-from phoenixdb.errors import OperationalError, NotSupportedError, ProgrammingError
-from common_pb2 import ColumnMetaData
+from phoenixdb.errors import InternalError, ProgrammingError
+from common_pb2 import ColumnMetaData, Rep
 
 __all__ = ['Cursor', 'ColumnDescription']
 
@@ -56,6 +55,26 @@ def datetime_to_java_sql_timestamp(d):
     td = d - datetime.datetime(1970, 1, 1)
     return td.microseconds / 1000 + (td.seconds + td.days * 24 * 3600) * 1000
 
+def typedValueToNative(v):
+    if Rep.Name(v.type) == "BOOLEAN" or Rep.Name(v.type) == "BOOLEAN":
+        return v.bool_value
+
+    elif Rep.Name(v.type) == "STRING" or Rep.Name(v.type) == "PRIMITIVE_CHAR" or Rep.Name(v.type) == "CHARACTER" or Rep.Name(v.type) == "BIG_DECIMAL":
+        return v.string_value
+
+    elif Rep.Name(v.type) == "FLOAT" or Rep.Name(v.type) == "PRIMITIVE_FLOAT" or Rep.Name(v.type) == "DOUBLE" or Rep.Name(v.type) == "PRIMITIVE_DOUBLE":
+        return v.double_value
+
+    elif Rep.Name(v.type) == "LONG" or Rep.Name(v.type) == "PRIMITIVE_LONG" or Rep.Name(v.type) == "INTEGER" or Rep.Name(v.type) == "PRIMITIVE_INT" or \
+                    Rep.Name(v.type) == "BIG_INTEGER" or Rep.Name(v.type) == "NUMBER" or Rep.Name(v.type) == "BYTE" or Rep.Name(v.type) == "PRIMITIVE_BYTE" or \
+                    Rep.Name(v.type) == "SHORT" or Rep.Name(v.type) == "PRIMITIVE_SHORT":
+        return v.number_value
+
+    elif Rep.Name(v.type) == "BYTE_STRING":
+        return v.bytes_value
+
+    else:
+        return None
 
 class Cursor(object):
     """Database cursor for executing queries and iterating over results.
@@ -171,10 +190,10 @@ class Cursor(object):
                 self._column_data_types.append((i, date_from_java_sql_date))
             elif column.column_class_name == 'java.sql.Timestamp':
                 self._column_data_types.append((i, datetime_from_java_sql_timestamp))
-            elif column.column_class_name == 'java.lang.String':
-                self._column_data_types.append((i, str))
             elif column.type.name == 'BINARY':
                 self._column_data_types.append((i, base64.b64decode))
+            else:
+                self._column_data_types.append((i, None))
 
         for parameter in signature.parameters:
             if parameter.class_name == 'java.math.BigDecimal':
@@ -305,11 +324,12 @@ class Cursor(object):
             if not self._frame.done:
                 self._fetch_next_frame()
         for i, data_type in self._column_data_types:
-            value = row.value[i]
-            if value is not None:
-                result_row.append(data_type(value.scalar_value.string_value))
+            value = row.value[i].scalar_value
+            if data_type is not None and value.null != True:
+                result_row.append(data_type(typedValueToNative(value)))
             else:
-                result_row.append(None)
+                result_row.append(typedValueToNative(value))
+
         return result_row
 
     def fetchmany(self, size=None):
