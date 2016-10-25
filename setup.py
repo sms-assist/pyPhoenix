@@ -26,6 +26,7 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     cmdclass=cmdclass,
+    install_requires=['protobuf'],
     command_options={
         'build_sphinx': {
             'version': ('setup.py', version),

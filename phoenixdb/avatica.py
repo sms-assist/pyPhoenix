@@ -213,9 +213,5 @@ class AvaticaClient(object):
 
         return self._apply(request).frame
 
-
-
-
-
     def supportsExecute(self):
         return True

@@ -330,7 +330,7 @@ class Cursor(object):
             else:
                 result_row.append(typedValueToNative(value))
 
-        return result_row
+        return tuple(result_row)
 
     def fetchmany(self, size=None):
         if size is None:
