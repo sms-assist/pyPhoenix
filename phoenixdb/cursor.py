@@ -278,17 +278,10 @@ class Cursor(object):
                 operation, maxRowCount=self.itersize)
             self._set_id(statement.id)
             self._set_signature(statement.signature)
-            if self._connection._client.supportsExecute():
-                results = self._connection._client.execute(self._connection._id, self._id,
-                    self._transform_parameters(parameters),
-                    maxRowCount=self.itersize)
-                self._process_results(results)
-            else:
-                # XXX old avatica (1.4-), remove later
-                frame = self._connection._client.fetch(self._connection._id, self._id,
-                    self._transform_parameters(parameters),
-                    fetchMaxRowCount=self.itersize)
-                self._set_frame(frame)
+            results = self._connection._client.execute(self._connection._id, self._id,
+                    self._transform_parameters(parameters), maxRowCount=self.itersize)
+            self._process_results(results)
+
 
     def executemany(self, operation, seq_of_parameters):
         if self._closed:
@@ -300,15 +293,10 @@ class Cursor(object):
         self._set_id(statement.id)
         self._set_signature(statement.signature)
         for parameters in seq_of_parameters:
-            if self._connection._client.supportsExecute():
-                self._connection._client.execute(self._connection._id, self._id,
+            self._connection._client.execute(self._connection._id, self._id,
                     self._transform_parameters(parameters),
                     maxRowCount=0)
-            else:
-                # XXX old avatica (1.4-), remove later
-                self._connection._client.fetch(self._connection._id, self._id,
-                    self._transform_parameters(parameters),
-                    fetchMaxRowCount=0)
+
 
     def fetchone(self):
         result_row = []
@@ -325,7 +313,7 @@ class Cursor(object):
                 self._fetch_next_frame()
         for i, data_type in self._column_data_types:
             value = row.value[i].scalar_value
-            if data_type is not None and value.null != True:
+            if data_type is not None and value.null is not True:
                 result_row.append(data_type(typedValueToNative(value)))
             else:
                 result_row.append(typedValueToNative(value))

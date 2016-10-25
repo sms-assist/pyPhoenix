@@ -1,12 +1,11 @@
+from requests_pb2 import *
+from common_pb2 import *
+from responses_pb2 import *
 import urlparse
 import logging
-import requests_pb2
-from common_pb2 import WireMessage, StatementHandle, ConnectionProperties
-import responses_pb2
 import socket
 import httplib
 from phoenixdb import errors
-import uuid
 import math
 import time
 from importlib import import_module
@@ -87,7 +86,7 @@ class AvaticaClient(object):
         response = get_class(wire_message.name)
         response.ParseFromString(wire_message.wrapped_message)
 
-        if(type(response) is responses_pb2.ErrorResponse):
+        if(type(response) is ErrorResponse):
             raise errors.InterfaceError(str(response.error_code) + ' ' + str(response.sql_state), response.exceptions)
 
         return response
@@ -121,29 +120,29 @@ class AvaticaClient(object):
                 return response
 
     def getCatalogs(self, connectionId):
-        request = requests_pb2.CatalogsRequest(connection_id=connectionId)
+        request = CatalogsRequest(connection_id=connectionId)
         response = self._apply(request)
         return response
 
     def openConnection(self, connectionId, info=None):
-        request = requests_pb2.OpenConnectionRequest(connection_id=connectionId)
+        request = OpenConnectionRequest(connection_id=connectionId)
         self._apply(request)
 
     def connectionSync(self, connectionId, conn_props=None):
 
-        request = requests_pb2.ConnectionSyncRequest(connection_id=connectionId, conn_props=conn_props)
+        request = ConnectionSyncRequest(connection_id=connectionId, conn_props=conn_props)
         conn_props = self._apply(request).conn_props
         return conn_props
 
     def getSchemas(self, connectionId,  catalog=None, schemaPattern=None):
-        request = requests_pb2.SchemasRequest(connection_id=connectionId,
+        request = SchemasRequest(connection_id=connectionId,
                                               catalog=catalog,
                                               schema_pattern=schemaPattern)
         response = self._apply(request)
         return response
 
     def getTables(self, connectionId, catalog=None, schemaPattern=None, tableNamePattern=None, typeList=None):
-        request = requests_pb2.TablesRequest(connection_id=connectionId,
+        request = TablesRequest(connection_id=connectionId,
                                              catalog=catalog,
                                              schema_pattern=schemaPattern,
                                              table_name_pattern=tableNamePattern,
@@ -152,7 +151,7 @@ class AvaticaClient(object):
         return response
 
     def getColumns(self, connectionId, catalog=None, schemaPattern=None, tableNamePattern=None, columnNamePattern=None):
-        request = requests_pb2.ColumnsRequest(connection_id=connectionId,
+        request = ColumnsRequest(connection_id=connectionId,
                                               catalog=catalog,
                                              schema_pattern=schemaPattern,
                                              table_name_pattern=tableNamePattern,
@@ -161,34 +160,34 @@ class AvaticaClient(object):
         return response
 
     def getTableTypes(self, connectionId):
-        request = requests_pb2.TableTypesRequest(connection_id=connectionId)
+        request = TableTypesRequest(connection_id=connectionId)
         return self._apply(request)
 
     def getTypeInfo(self, connectionId):
-        request = requests_pb2.TypeInfoRequest(connection_id=connectionId)
+        request = TypeInfoRequest(connection_id=connectionId)
         return self._apply(request)
 
     def closeConnection(self, connectionId):
-        request = requests_pb2.CloseConnectionRequest(connection_id=connectionId)
+        request = CloseConnectionRequest(connection_id=connectionId)
         self._apply(request)
 
     def createStatement(self, connectionId):
-        request = requests_pb2.CreateStatementRequest(connection_id=connectionId)
+        request = CreateStatementRequest(connection_id=connectionId)
         return self._apply(request).statement_id
 
     def closeStatement(self, connectionId, statementId):
-        request = requests_pb2.CloseStatementRequest(connection_id=connectionId)
+        request = CloseStatementRequest(connection_id=connectionId)
         self._apply(request)
 
     def prepareAndExecute(self, connectionId, statementId, sql, maxRowCount=-1):
-        request = requests_pb2.PrepareAndExecuteRequest(connection_id=connectionId,
+        request = PrepareAndExecuteRequest(connection_id=connectionId,
                                                         statement_id=statementId,
                                                         sql=sql,
                                                         max_rows_total=maxRowCount)
         return self._apply(request).results
 
     def prepare(self, connectionId, sql, maxRowCount=-1):
-        request = requests_pb2.PrepareAndExecuteRequest(connection_id=connectionId,
+        request = PrepareRequest(connection_id=connectionId,
                                                         sql=sql,
                                                         max_rows_total=maxRowCount)
         return self._apply(request).statement
@@ -199,14 +198,14 @@ class AvaticaClient(object):
         if parameterValues == None:
             has_parameter_values = False
 
-        request = requests_pb2.ExecuteRequest(statementHandle=statementHandle,
+        request = ExecuteRequest(statementHandle=statementHandle,
                                               TypedValue=parameterValues,
                                               has_parameter_values=has_parameter_values,
                                               first_frame_max_size=maxRowCount)
         return self._apply(request).results
 
     def fetch(self, connectionId, statementId, offset=0, fetchMaxRowCount=-1):
-        request = requests_pb2.FetchRequest(connection_id=connectionId,
+        request = FetchRequest(connection_id=connectionId,
                                             statement_id=statementId,
                                             offset=offset,
                                             fetch_max_row_count=fetchMaxRowCount)
