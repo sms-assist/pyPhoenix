@@ -15,16 +15,18 @@
 import logging
 import base64
 import datetime
+import collections
 from decimal import Decimal
 from phoenixdb.types import Binary
 from phoenixdb.errors import InternalError, ProgrammingError
-from common_pb2 import ColumnMetaData, Rep
+from common_pb2 import Rep, TypedValue
 
 __all__ = ['Cursor', 'ColumnDescription']
 
 logger = logging.getLogger(__name__)
 
-
+ColumnDescription = collections.namedtuple('ColumnDescription', 'name type_code display_size internal_size precision scale null_ok')
+"""Named tuple for representing results from :attr:`Cursor.description`."""
 
 
 def time_from_java_sql_time(n):
@@ -157,13 +159,14 @@ class Cursor(object):
             return None
         description = []
         for column in self._signature.columns:
-            description.append(ColumnMetaData(
-                column_name=column.columnName,
-                type=column.type,
-                display_size=column.displaySize,
-                precision=column.precision,
-                scale=column.scale,
-                nullable=column.nullable,
+            description.append(ColumnDescription(
+                column.column_name,
+                column.type.name,
+                column.display_size,
+                None,
+                column.precision,
+                column.scale,
+                bool(column.nullable),
             ))
         return description
 
@@ -231,9 +234,10 @@ class Cursor(object):
         typed_parameters = []
         for value, data_type in zip(parameters, self._parameter_data_types):
             if value is None:
-                typed_parameters.append({'type': 'OBJECT', 'value': None})
+                typed_parameters.append(TypedValue(null=True, type=Rep.Value('NULL')))
             else:
                 if data_type[1] is not None:
+                    #TODO CPT do TypedValue
                     value = data_type[1](value)
                 typed_parameters.append({'type': data_type[0], 'value': value})
         return typed_parameters
@@ -267,7 +271,7 @@ class Cursor(object):
             raise ProgrammingError('the cursor is already closed')
         self._updatecount = -1
         self._set_frame(None)
-        if parameters is None:
+        if parameters is None or len(parameters) == 0:
             if self._id is None:
                 self._set_id(self._connection._client.createStatement(self._connection._id))
             results = self._connection._client.prepareAndExecute(self._connection._id, self._id,
