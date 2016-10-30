@@ -13,7 +13,7 @@ from importlib import import_module
 __all__ = ['AvaticaClient']
 
 logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 AVATICA_CLASS_BASE = "org.apache.calcite.avatica.proto"
 
