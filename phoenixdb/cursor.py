@@ -57,8 +57,9 @@ def datetime_to_java_sql_timestamp(d):
     td = d - datetime.datetime(1970, 1, 1)
     return td.microseconds / 1000 + (td.seconds + td.days * 24 * 3600) * 1000
 
+
 def typedValueToNative(v):
-    if Rep.Name(v.type) == "BOOLEAN" or Rep.Name(v.type) == "BOOLEAN":
+    if Rep.Name(v.type) == "BOOLEAN" or Rep.Name(v.type) == "PRIMITIVE_BOOLEAN":
         return v.bool_value
 
     elif Rep.Name(v.type) == "STRING" or Rep.Name(v.type) == "PRIMITIVE_CHAR" or Rep.Name(v.type) == "CHARACTER" or Rep.Name(v.type) == "BIG_DECIMAL":
@@ -200,46 +201,51 @@ class Cursor(object):
 
         for parameter in signature.parameters:
             if parameter.class_name == 'java.math.BigDecimal':
-                self._parameter_data_types.append(('NUMBER', None))
+                self._parameter_data_types.append(('NUMBER', None, "number_value"))
             elif parameter.class_name == 'java.lang.Float':
-                self._parameter_data_types.append(('FLOAT', None))
+                self._parameter_data_types.append(('FLOAT', None, "double_value"))
             elif parameter.class_name == 'java.lang.Double':
-                self._parameter_data_types.append(('DOUBLE', None))
+                self._parameter_data_types.append(('DOUBLE', None, "double_value"))
             elif parameter.class_name == 'java.lang.Long':
-                self._parameter_data_types.append(('LONG', None))
+                self._parameter_data_types.append(('LONG', None, "number_value"))
             elif parameter.class_name == 'java.lang.Integer':
-                self._parameter_data_types.append(('INTEGER', None))
+                self._parameter_data_types.append(('INTEGER', None, "number_value"))
             elif parameter.class_name == 'java.lang.Short':
-                self._parameter_data_types.append(('SHORT', None))
+                self._parameter_data_types.append(('SHORT', None, "number_value"))
             elif parameter.class_name == 'java.lang.Byte':
-                self._parameter_data_types.append(('BYTE', None))
+                self._parameter_data_types.append(('BYTE', None, "bytes_value"))
             elif parameter.class_name == 'java.lang.Boolean':
-                self._parameter_data_types.append(('BOOLEAN', None))
+                self._parameter_data_types.append(('BOOLEAN', None, "bool_value"))
             elif parameter.class_name == 'java.lang.String':
-                self._parameter_data_types.append(('STRING', None))
+                self._parameter_data_types.append(('STRING', None, "string_value"))
             elif parameter.class_name == 'java.sql.Time':
-                self._parameter_data_types.append(('JAVA_SQL_TIME', time_to_java_sql_time))
+                self._parameter_data_types.append(('JAVA_SQL_TIME', time_to_java_sql_time, "number_value"))
             elif parameter.class_name == 'java.sql.Date':
-                self._parameter_data_types.append(('JAVA_SQL_DATE', date_to_java_sql_date))
+                self._parameter_data_types.append(('JAVA_SQL_DATE', date_to_java_sql_date, "number_value"))
             elif parameter.class_name == 'java.sql.Timestamp':
-                self._parameter_data_types.append(('JAVA_SQL_TIMESTAMP', datetime_to_java_sql_timestamp))
+                self._parameter_data_types.append(('JAVA_SQL_TIMESTAMP', datetime_to_java_sql_timestamp, "number_value"))
             elif parameter.class_name == '[B':
-                self._parameter_data_types.append(('BYTE_STRING', Binary))
+                self._parameter_data_types.append(('BYTE_STRING', Binary, "bytes_value"))
             #elif parameter.class_name == 'org.apache.phoenix.schema.types.PhoenixArray':
             #    self._parameter_data_types.append(('ARRAY', None))
             else:
-                self._parameter_data_types.append(('OBJECT', None))
+                self._parameter_data_types.append(('NULL', None))
 
     def _transform_parameters(self, parameters):
         typed_parameters = []
         for value, data_type in zip(parameters, self._parameter_data_types):
+
             if value is None:
                 typed_parameters.append(TypedValue(null=True, type=Rep.Value('NULL')))
             else:
+                v = TypedValue()
+                v.type = Rep.Value(data_type[0])
                 if data_type[1] is not None:
-                    #TODO CPT do TypedValue
-                    value = data_type[1](value)
-                typed_parameters.append({'type': data_type[0], 'value': value})
+                    setattr(v, data_type[2], data_type[1](value))
+                else:
+                    setattr(v, data_type[2], value)
+
+                typed_parameters.append(v)
         return typed_parameters
 
     def _set_frame(self, frame):
@@ -282,7 +288,7 @@ class Cursor(object):
                 operation, maxRowCount=self.itersize)
             self._set_id(statement.id)
             self._set_signature(statement.signature)
-            results = self._connection._client.execute(self._connection._id, self._id,
+            results = self._connection._client.execute(self._connection._id, self._id,self._signature,
                     self._transform_parameters(parameters), maxRowCount=self.itersize)
             self._process_results(results)
 

@@ -85,7 +85,8 @@ class AvaticaClient(object):
         response.ParseFromString(wire_message.wrapped_message)
 
         if(type(response) is ErrorResponse):
-            raise errors.InterfaceError(str(response.error_code) + ' ' + str(response.sql_state), response.exceptions)
+            raise errors.InterfaceError(response.error_message, code=response.error_code, sqlstate=response.sql_state, cause=response.exceptions)
+
 
         return response
 
@@ -181,25 +182,25 @@ class AvaticaClient(object):
         request = PrepareAndExecuteRequest(connection_id=connectionId,
                                                         statement_id=statementId,
                                                         sql=sql,
-                                                        max_rows_total=maxRowCount)
+                                                        max_rows_total=long(maxRowCount))
         return self._apply(request).results
 
     def prepare(self, connectionId, sql, maxRowCount=-1):
         request = PrepareRequest(connection_id=connectionId,
                                                         sql=sql,
-                                                        max_rows_total=maxRowCount)
+                                                        max_rows_total=long(maxRowCount))
         return self._apply(request).statement
 
-    def execute(self, connectionId, statementId, parameterValues=None, maxRowCount=-1):
-        statementHandle = StatementHandle(connection_id=connectionId, id=statementId)
+    def execute(self, connectionId, statementId, signature, parameterValues=None, maxRowCount=-1):
+        statementHandle = StatementHandle(connection_id=connectionId, id=statementId, signature=signature)
         has_parameter_values = True
-        if parameterValues == None:
+        if parameterValues is None or len(parameterValues) == 0:
             has_parameter_values = False
 
         request = ExecuteRequest(statementHandle=statementHandle,
-                                              TypedValue=parameterValues,
-                                              has_parameter_values=has_parameter_values,
-                                              first_frame_max_size=maxRowCount)
+                                 parameter_values=parameterValues,
+                                 has_parameter_values=has_parameter_values,
+                                 first_frame_max_size=maxRowCount)
         return self._apply(request).results
 
     def fetch(self, connectionId, statementId, offset=0, fetchMaxRowCount=-1):
