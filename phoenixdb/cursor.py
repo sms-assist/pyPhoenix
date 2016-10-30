@@ -182,22 +182,41 @@ class Cursor(object):
         self._parameter_data_types = []
         if signature is None:
             return
-        identity = lambda value: value
+
         for i, column in enumerate(signature.columns):
+
             if column.column_class_name == 'java.math.BigDecimal':
-                self._column_data_types.append((i, Decimal))
-            elif column.column_class_name == 'java.lang.Float' or column.column_class_name == 'java.lang.Double':
-                self._column_data_types.append((i, float))
+                self._column_data_types.append(('NUMBER', None, "number_value"))
+            elif column.column_class_name == 'java.lang.Float':
+                self._column_data_types.append(('FLOAT', float, "double_value"))
+            elif column.column_class_name == 'java.lang.Double':
+                self._column_data_types.append(('DOUBLE', None, "double_value"))
+            elif column.column_class_name == 'java.lang.Long':
+                self._column_data_types.append(('LONG', None, "number_value"))
+            elif column.column_class_name == 'java.lang.Integer':
+                self._column_data_types.append(('INTEGER', int, "number_value"))
+            elif column.column_class_name == 'java.lang.Short':
+                self._column_data_types.append(('SHORT', int, "number_value"))
+            elif column.column_class_name == 'java.lang.Byte':
+                self._column_data_types.append(('BYTE', Binary, "bytes_value"))
+            elif column.column_class_name == 'java.lang.Boolean':
+                self._column_data_types.append(('BOOLEAN', bool, "bool_value"))
+            elif column.column_class_name == 'java.lang.String':
+                self._column_data_types.append(('STRING', None, "string_value"))
             elif column.column_class_name == 'java.sql.Time':
-                self._column_data_types.append((i, time_from_java_sql_time))
+                self._column_data_types.append(('JAVA_SQL_TIME', time_to_java_sql_time, "number_value"))
             elif column.column_class_name == 'java.sql.Date':
-                self._column_data_types.append((i, date_from_java_sql_date))
+                self._column_data_types.append(('JAVA_SQL_DATE', date_to_java_sql_date, "number_value"))
             elif column.column_class_name == 'java.sql.Timestamp':
-                self._column_data_types.append((i, datetime_from_java_sql_timestamp))
-            elif column.type.name == 'BINARY':
-                self._column_data_types.append((i, base64.b64decode))
+                self._column_data_types.append(('JAVA_SQL_TIMESTAMP', datetime_to_java_sql_timestamp, "number_value"))
+            elif column.column_class_name == '[B':
+                self._column_data_types.append(('BYTE_STRING', Binary, "bytes_value"))
+            #elif column.column_class_name == 'org.apache.phoenix.schema.types.PhoenixArray':
+            #    self._column_data_types.append(('ARRAY', None))
             else:
-                self._column_data_types.append((i, None))
+                self._column_data_types.append(('NULL', None))
+
+
 
         for parameter in signature.parameters:
             if parameter.class_name == 'java.math.BigDecimal':
@@ -321,12 +340,14 @@ class Cursor(object):
             self._pos = None
             if not self._frame.done:
                 self._fetch_next_frame()
-        for i, data_type in self._column_data_types:
-            value = row.value[i].scalar_value
-            if data_type is not None and value.null is not True:
-                result_row.append(data_type(typedValueToNative(value)))
+        for value, data_type in zip(row.value, self._column_data_types):
+            if value.scalar_value.null:
+                result_row.append(None)
             else:
-                result_row.append(typedValueToNative(value))
+                if data_type[1] is not None:
+                    result_row.append(data_type[1](getattr(value.scalar_value, data_type[2])))
+                else:
+                    result_row.append(getattr(value.scalar_value, data_type[2]))
 
         return tuple(result_row)
 
