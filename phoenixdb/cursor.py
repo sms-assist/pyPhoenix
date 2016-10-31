@@ -176,6 +176,41 @@ class Cursor(object):
             self._connection._client.closeStatement(self._connection._id, self._id)
         self._id = id
 
+    def _set_type(self, types, attribute_string, return_list):
+        for column in types:
+
+            if getattr(column, attribute_string) == 'java.math.BigDecimal':
+                return_list.append(('NUMBER', None, "number_value"))
+            elif getattr(column, attribute_string) == 'java.lang.Float':
+                return_list.append(('FLOAT', float, "double_value"))
+            elif getattr(column, attribute_string) == 'java.lang.Double':
+                return_list.append(('DOUBLE', None, "double_value"))
+            elif getattr(column, attribute_string) == 'java.lang.Long':
+                return_list.append(('LONG', None, "number_value"))
+            elif getattr(column, attribute_string) == 'java.lang.Integer':
+                return_list.append(('INTEGER', int, "number_value"))
+            elif getattr(column, attribute_string) == 'java.lang.Short':
+                return_list.append(('SHORT', int, "number_value"))
+            elif getattr(column, attribute_string) == 'java.lang.Byte':
+                return_list.append(('BYTE', Binary, "bytes_value"))
+            elif getattr(column, attribute_string) == 'java.lang.Boolean':
+                return_list.append(('BOOLEAN', bool, "bool_value"))
+            elif getattr(column, attribute_string) == 'java.lang.String':
+                return_list.append(('STRING', None, "string_value"))
+            elif getattr(column, attribute_string) == 'java.sql.Time':
+                return_list.append(('JAVA_SQL_TIME', time_to_java_sql_time, "number_value"))
+            elif getattr(column, attribute_string) == 'java.sql.Date':
+                return_list.append(('JAVA_SQL_DATE', date_to_java_sql_date, "number_value"))
+            elif getattr(column, attribute_string) == 'java.sql.Timestamp':
+                return_list.append(('JAVA_SQL_TIMESTAMP', datetime_to_java_sql_timestamp, "number_value"))
+            elif getattr(column, attribute_string) == '[B':
+                return_list.append(('BYTE_STRING', Binary, "bytes_value"))
+            #elif getattr(column,attribute_string) == 'org.apache.phoenix.schema.types.PhoenixArray':
+            #    return_list.append(('ARRAY', None))
+            else:
+                return_list.append(('NULL', None))
+
+
     def _set_signature(self, signature):
         self._signature = signature
         self._column_data_types = []
@@ -183,72 +218,10 @@ class Cursor(object):
         if signature is None:
             return
 
-        for i, column in enumerate(signature.columns):
+        self._set_type(signature.columns, 'column_class_name', self._column_data_types)
 
-            if column.column_class_name == 'java.math.BigDecimal':
-                self._column_data_types.append(('NUMBER', None, "number_value"))
-            elif column.column_class_name == 'java.lang.Float':
-                self._column_data_types.append(('FLOAT', float, "double_value"))
-            elif column.column_class_name == 'java.lang.Double':
-                self._column_data_types.append(('DOUBLE', None, "double_value"))
-            elif column.column_class_name == 'java.lang.Long':
-                self._column_data_types.append(('LONG', None, "number_value"))
-            elif column.column_class_name == 'java.lang.Integer':
-                self._column_data_types.append(('INTEGER', int, "number_value"))
-            elif column.column_class_name == 'java.lang.Short':
-                self._column_data_types.append(('SHORT', int, "number_value"))
-            elif column.column_class_name == 'java.lang.Byte':
-                self._column_data_types.append(('BYTE', Binary, "bytes_value"))
-            elif column.column_class_name == 'java.lang.Boolean':
-                self._column_data_types.append(('BOOLEAN', bool, "bool_value"))
-            elif column.column_class_name == 'java.lang.String':
-                self._column_data_types.append(('STRING', None, "string_value"))
-            elif column.column_class_name == 'java.sql.Time':
-                self._column_data_types.append(('JAVA_SQL_TIME', time_to_java_sql_time, "number_value"))
-            elif column.column_class_name == 'java.sql.Date':
-                self._column_data_types.append(('JAVA_SQL_DATE', date_to_java_sql_date, "number_value"))
-            elif column.column_class_name == 'java.sql.Timestamp':
-                self._column_data_types.append(('JAVA_SQL_TIMESTAMP', datetime_to_java_sql_timestamp, "number_value"))
-            elif column.column_class_name == '[B':
-                self._column_data_types.append(('BYTE_STRING', Binary, "bytes_value"))
-            #elif column.column_class_name == 'org.apache.phoenix.schema.types.PhoenixArray':
-            #    self._column_data_types.append(('ARRAY', None))
-            else:
-                self._column_data_types.append(('NULL', None))
+        self._set_type(signature.parameters, 'class_name', self._parameter_data_types)
 
-
-
-        for parameter in signature.parameters:
-            if parameter.class_name == 'java.math.BigDecimal':
-                self._parameter_data_types.append(('NUMBER', None, "number_value"))
-            elif parameter.class_name == 'java.lang.Float':
-                self._parameter_data_types.append(('FLOAT', None, "double_value"))
-            elif parameter.class_name == 'java.lang.Double':
-                self._parameter_data_types.append(('DOUBLE', None, "double_value"))
-            elif parameter.class_name == 'java.lang.Long':
-                self._parameter_data_types.append(('LONG', None, "number_value"))
-            elif parameter.class_name == 'java.lang.Integer':
-                self._parameter_data_types.append(('INTEGER', None, "number_value"))
-            elif parameter.class_name == 'java.lang.Short':
-                self._parameter_data_types.append(('SHORT', None, "number_value"))
-            elif parameter.class_name == 'java.lang.Byte':
-                self._parameter_data_types.append(('BYTE', None, "bytes_value"))
-            elif parameter.class_name == 'java.lang.Boolean':
-                self._parameter_data_types.append(('BOOLEAN', None, "bool_value"))
-            elif parameter.class_name == 'java.lang.String':
-                self._parameter_data_types.append(('STRING', None, "string_value"))
-            elif parameter.class_name == 'java.sql.Time':
-                self._parameter_data_types.append(('JAVA_SQL_TIME', time_to_java_sql_time, "number_value"))
-            elif parameter.class_name == 'java.sql.Date':
-                self._parameter_data_types.append(('JAVA_SQL_DATE', date_to_java_sql_date, "number_value"))
-            elif parameter.class_name == 'java.sql.Timestamp':
-                self._parameter_data_types.append(('JAVA_SQL_TIMESTAMP', datetime_to_java_sql_timestamp, "number_value"))
-            elif parameter.class_name == '[B':
-                self._parameter_data_types.append(('BYTE_STRING', Binary, "bytes_value"))
-            #elif parameter.class_name == 'org.apache.phoenix.schema.types.PhoenixArray':
-            #    self._parameter_data_types.append(('ARRAY', None))
-            else:
-                self._parameter_data_types.append(('NULL', None))
 
     def _transform_parameters(self, parameters):
         typed_parameters = []
