@@ -1,4 +1,4 @@
-# Copyright 2015 Lukas Lalinsky
+# Copyright 2016 Dimitri Capitaine
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@ import uuid
 import weakref
 from phoenixdb import errors
 from phoenixdb.cursor import Cursor
-from phoenixdb.errors import OperationalError, NotSupportedError, ProgrammingError
+from phoenixdb.errors import ProgrammingError
 from common_pb2 import ConnectionProperties
 
 __all__ = ['Connection']

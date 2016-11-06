@@ -1,4 +1,4 @@
-# Copyright 2015 Lukas Lalinsky
+# Copyright 2016 Dimitri Capitaine
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,10 +13,8 @@
 # limitations under the License.
 
 import logging
-import base64
 import datetime
 import collections
-from decimal import Decimal
 from phoenixdb.types import Binary
 from phoenixdb.errors import InternalError, ProgrammingError
 from common_pb2 import Rep, TypedValue
@@ -290,13 +288,11 @@ class Cursor(object):
             raise ProgrammingError('the cursor is already closed')
         self._updatecount = -1
         self._set_frame(None)
-        statement = self._connection._client.prepare(self._connection._id,
-            operation, maxRowCount=0)
+        statement = self._connection._client.prepare(self._connection._id, operation, maxRowCount=0)
         self._set_id(statement.id)
         self._set_signature(statement.signature)
         for parameters in seq_of_parameters:
-            self._connection._client.execute(self._connection._id, self._id,
-                    self._transform_parameters(parameters),
+            self._connection._client.execute(self._connection._id, self._id, self._transform_parameters(parameters),
                     maxRowCount=0)
 
 

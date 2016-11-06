@@ -14,7 +14,6 @@
 
 import sys
 import os
-import shlex
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -51,7 +50,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'phoenixdb'
-copyright = u'2015, Lukas Lalinsky'
+copyright = u'2016, Dimitri Capitaine'
 author = u'Lukas Lalinsky'
 
 # The version info for the project you're documenting, acts as replacement for
