@@ -13,11 +13,10 @@
 # limitations under the License.
 
 import logging
-import datetime
 import collections
-from phoenixdb.types import Binary
 from phoenixdb.errors import InternalError, ProgrammingError
 from common_pb2 import Rep, TypedValue
+from types import javaTypetoNative
 
 __all__ = ['Cursor', 'ColumnDescription']
 
@@ -27,55 +26,8 @@ ColumnDescription = collections.namedtuple('ColumnDescription', 'name type_code 
 """Named tuple for representing results from :attr:`Cursor.description`."""
 
 
-def time_from_java_sql_time(n):
-    dt = datetime.datetime(1970, 1, 1) + datetime.timedelta(milliseconds=n)
-    return dt.time()
 
 
-def time_to_java_sql_time(t):
-    return ((t.hour * 60 + t.minute) * 60 + t.second) * 1000 + t.microsecond / 1000
-
-
-def date_from_java_sql_date(n):
-    return datetime.date(1970, 1, 1) + datetime.timedelta(days=n)
-
-
-def date_to_java_sql_date(d):
-    if isinstance(d, datetime.datetime):
-        d = d.date()
-    td = d - datetime.date(1970, 1, 1)
-    return td.days
-
-
-def datetime_from_java_sql_timestamp(n):
-    return datetime.datetime(1970, 1, 1) + datetime.timedelta(milliseconds=n)
-
-
-def datetime_to_java_sql_timestamp(d):
-    td = d - datetime.datetime(1970, 1, 1)
-    return td.microseconds / 1000 + (td.seconds + td.days * 24 * 3600) * 1000
-
-
-def typedValueToNative(v):
-    if Rep.Name(v.type) == "BOOLEAN" or Rep.Name(v.type) == "PRIMITIVE_BOOLEAN":
-        return v.bool_value
-
-    elif Rep.Name(v.type) == "STRING" or Rep.Name(v.type) == "PRIMITIVE_CHAR" or Rep.Name(v.type) == "CHARACTER" or Rep.Name(v.type) == "BIG_DECIMAL":
-        return v.string_value
-
-    elif Rep.Name(v.type) == "FLOAT" or Rep.Name(v.type) == "PRIMITIVE_FLOAT" or Rep.Name(v.type) == "DOUBLE" or Rep.Name(v.type) == "PRIMITIVE_DOUBLE":
-        return v.double_value
-
-    elif Rep.Name(v.type) == "LONG" or Rep.Name(v.type) == "PRIMITIVE_LONG" or Rep.Name(v.type) == "INTEGER" or Rep.Name(v.type) == "PRIMITIVE_INT" or \
-                    Rep.Name(v.type) == "BIG_INTEGER" or Rep.Name(v.type) == "NUMBER" or Rep.Name(v.type) == "BYTE" or Rep.Name(v.type) == "PRIMITIVE_BYTE" or \
-                    Rep.Name(v.type) == "SHORT" or Rep.Name(v.type) == "PRIMITIVE_SHORT":
-        return v.number_value
-
-    elif Rep.Name(v.type) == "BYTE_STRING":
-        return v.bytes_value
-
-    else:
-        return None
 
 class Cursor(object):
     """Database cursor for executing queries and iterating over results.
@@ -176,38 +128,7 @@ class Cursor(object):
 
     def _set_type(self, types, attribute_string, return_list):
         for column in types:
-
-            if getattr(column, attribute_string) == 'java.math.BigDecimal':
-                return_list.append(('NUMBER', None, "number_value"))
-            elif getattr(column, attribute_string) == 'java.lang.Float':
-                return_list.append(('FLOAT', float, "double_value"))
-            elif getattr(column, attribute_string) == 'java.lang.Double':
-                return_list.append(('DOUBLE', None, "double_value"))
-            elif getattr(column, attribute_string) == 'java.lang.Long':
-                return_list.append(('LONG', None, "number_value"))
-            elif getattr(column, attribute_string) == 'java.lang.Integer':
-                return_list.append(('INTEGER', int, "number_value"))
-            elif getattr(column, attribute_string) == 'java.lang.Short':
-                return_list.append(('SHORT', int, "number_value"))
-            elif getattr(column, attribute_string) == 'java.lang.Byte':
-                return_list.append(('BYTE', Binary, "bytes_value"))
-            elif getattr(column, attribute_string) == 'java.lang.Boolean':
-                return_list.append(('BOOLEAN', bool, "bool_value"))
-            elif getattr(column, attribute_string) == 'java.lang.String':
-                return_list.append(('STRING', None, "string_value"))
-            elif getattr(column, attribute_string) == 'java.sql.Time':
-                return_list.append(('JAVA_SQL_TIME', time_to_java_sql_time, "number_value"))
-            elif getattr(column, attribute_string) == 'java.sql.Date':
-                return_list.append(('JAVA_SQL_DATE', date_to_java_sql_date, "number_value"))
-            elif getattr(column, attribute_string) == 'java.sql.Timestamp':
-                return_list.append(('JAVA_SQL_TIMESTAMP', datetime_to_java_sql_timestamp, "number_value"))
-            elif getattr(column, attribute_string) == '[B':
-                return_list.append(('BYTE_STRING', Binary, "bytes_value"))
-            #elif getattr(column,attribute_string) == 'org.apache.phoenix.schema.types.PhoenixArray':
-            #    return_list.append(('ARRAY', None))
-            else:
-                return_list.append(('NULL', None))
-
+            return_list.append(javaTypetoNative(getattr(column, attribute_string)))
 
     def _set_signature(self, signature):
         self._signature = signature

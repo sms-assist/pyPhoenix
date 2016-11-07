@@ -15,6 +15,7 @@
 import time
 import datetime
 import base64
+from common_pb2 import Rep
 
 __all__ = [
     'Date', 'Time', 'Timestamp', 'DateFromTicks', 'TimeFromTicks', 'TimestampFromTicks',
@@ -59,6 +60,34 @@ def Binary(value):
     return _BinaryString(base64.b64encode(value))
 
 
+def time_from_java_sql_time(n):
+    dt = datetime.datetime(1970, 1, 1) + datetime.timedelta(milliseconds=n)
+    return dt.time()
+
+
+def time_to_java_sql_time(t):
+    return ((t.hour * 60 + t.minute) * 60 + t.second) * 1000 + t.microsecond / 1000
+
+
+def date_from_java_sql_date(n):
+    return datetime.date(1970, 1, 1) + datetime.timedelta(days=n)
+
+
+def date_to_java_sql_date(d):
+    if isinstance(d, datetime.datetime):
+        d = d.date()
+    td = d - datetime.date(1970, 1, 1)
+    return td.days
+
+
+def datetime_from_java_sql_timestamp(n):
+    return datetime.datetime(1970, 1, 1) + datetime.timedelta(milliseconds=n)
+
+
+def datetime_to_java_sql_timestamp(d):
+    td = d - datetime.datetime(1970, 1, 1)
+    return td.microseconds / 1000 + (td.seconds + td.days * 24 * 3600) * 1000
+
 class _BinaryString(str):
     pass
 
@@ -97,3 +126,56 @@ BOOLEAN = ColumnType(['BOOLEAN'])
 """Type object that can be used to describe boolean columns. This is a phoenixdb-specific extension."""
 
 # XXX ARRAY
+
+def typedValueToNative(v):
+    if Rep.Name(v.type) == "BOOLEAN" or Rep.Name(v.type) == "PRIMITIVE_BOOLEAN":
+        return v.bool_value
+
+    elif Rep.Name(v.type) == "STRING" or Rep.Name(v.type) == "PRIMITIVE_CHAR" or Rep.Name(v.type) == "CHARACTER" or Rep.Name(v.type) == "BIG_DECIMAL":
+        return v.string_value
+
+    elif Rep.Name(v.type) == "FLOAT" or Rep.Name(v.type) == "PRIMITIVE_FLOAT" or Rep.Name(v.type) == "DOUBLE" or Rep.Name(v.type) == "PRIMITIVE_DOUBLE":
+        return v.double_value
+
+    elif Rep.Name(v.type) == "LONG" or Rep.Name(v.type) == "PRIMITIVE_LONG" or Rep.Name(v.type) == "INTEGER" or Rep.Name(v.type) == "PRIMITIVE_INT" or \
+                    Rep.Name(v.type) == "BIG_INTEGER" or Rep.Name(v.type) == "NUMBER" or Rep.Name(v.type) == "BYTE" or Rep.Name(v.type) == "PRIMITIVE_BYTE" or \
+                    Rep.Name(v.type) == "SHORT" or Rep.Name(v.type) == "PRIMITIVE_SHORT":
+        return v.number_value
+
+    elif Rep.Name(v.type) == "BYTE_STRING":
+        return v.bytes_value
+
+    else:
+        return None
+
+def javaTypetoNative(java_type):
+    if java_type == 'java.math.BigDecimal':
+        return ('NUMBER', None, "number_value")
+    elif java_type == 'java.lang.Float':
+        return ('FLOAT', float, "double_value")
+    elif java_type == 'java.lang.Double':
+        return ('DOUBLE', None, "double_value")
+    elif java_type == 'java.lang.Long':
+        return ('LONG', None, "number_value")
+    elif java_type == 'java.lang.Integer':
+        return ('INTEGER', int, "number_value")
+    elif java_type == 'java.lang.Short':
+        return ('SHORT', int, "number_value")
+    elif java_type == 'java.lang.Byte':
+        return ('BYTE', Binary, "bytes_value")
+    elif java_type == 'java.lang.Boolean':
+        return ('BOOLEAN', bool, "bool_value")
+    elif java_type == 'java.lang.String':
+        return ('STRING', None, "string_value")
+    elif java_type == 'java.sql.Time':
+        return ('JAVA_SQL_TIME', time_to_java_sql_time, "number_value")
+    elif java_type == 'java.sql.Date':
+        return ('JAVA_SQL_DATE', date_to_java_sql_date, "number_value")
+    elif java_type == 'java.sql.Timestamp':
+        return ('JAVA_SQL_TIMESTAMP', datetime_to_java_sql_timestamp, "number_value")
+    elif java_type == '[B':
+        return ('BYTE_STRING', Binary, "bytes_value")
+        #elif java_type == 'org.apache.phoenix.schema.types.PhoenixArray':
+        #    return ('ARRAY', None)
+    else:
+        return ('NULL', None)
