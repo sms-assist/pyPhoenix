@@ -12,10 +12,6 @@ which should be familiar to most Python programmers.
 Installation
 ------------
 
-The easiest way to install the library is using `pip <https://pip.pypa.io/en/stable/>`_::
-
-    pip install phoenixdb
-
 You can also download the source code and install it manually::
 
     cd /path/to/python-phoenix-x.y.z/
