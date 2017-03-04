@@ -1,5 +1,11 @@
 Changelog
 =========
+
+Version 0.6
+-----------
+
+- rename project
+
 Version 0.5
 -----------
 

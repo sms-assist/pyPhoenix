@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
-import phoenixdb
+import pyphoenix
 
-with phoenixdb.connect('http://localhost:8765/', autocommit=True) as connection:
+with pyphoenix.connect('http://localhost:8765/', autocommit=True) as connection:
     with connection.cursor() as cursor:
         cursor.execute("DROP TABLE IF EXISTS test")
         cursor.execute("CREATE TABLE test (id INTEGER PRIMARY KEY, text VARCHAR)")

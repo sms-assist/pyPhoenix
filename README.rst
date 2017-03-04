@@ -1,7 +1,7 @@
 Phoenix database adapter for Python
 ===================================
 
-``phoenixdb`` is a Python library for accessing the
+``pyphoenix`` is a Python library for accessing the
 `Phoenix SQL database <http://phoenix.apache.org/>`_
 using the
 `remote query server <http://phoenix.apache.org/server.html>`_ introduced
@@ -12,9 +12,13 @@ which should be familiar to most Python programmers.
 Installation
 ------------
 
+The easiest way to install the library is using `pip <https://pip.pypa.io/en/stable/>`_::
+
+    pip install pyphoenix
+
 You can also download the source code and install it manually::
 
-    cd /path/to/python-phoenix-x.y.z/
+    cd /path/to/pyphoenix/
     python setup.py install
 
 Usage
@@ -23,7 +27,7 @@ Usage
 The library implements the standard DB API 2.0 interface, so it can be
 used the same way you would use any other SQL database from Python, for example::
 
-    import phoenixdb
+    import pyphoenix
 
     database_url = 'http://localhost:8765/'
     conn = phoenixdb.connect(database_url, autocommit=True)
