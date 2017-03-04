@@ -168,11 +168,11 @@ def javaTypetoNative(java_type):
     elif java_type == 'java.lang.String':
         return ('STRING', None, "string_value")
     elif java_type == 'java.sql.Time':
-        return ('JAVA_SQL_TIME', time_to_java_sql_time, "number_value")
+        return ('JAVA_SQL_TIME', time_from_java_sql_time, "number_value")
     elif java_type == 'java.sql.Date':
-        return ('JAVA_SQL_DATE', date_to_java_sql_date, "number_value")
+        return ('JAVA_SQL_DATE', date_from_java_sql_date, "number_value")
     elif java_type == 'java.sql.Timestamp':
-        return ('JAVA_SQL_TIMESTAMP', datetime_to_java_sql_timestamp, "number_value")
+        return ('JAVA_SQL_TIMESTAMP', datetime_from_java_sql_timestamp, "number_value")
     elif java_type == '[B':
         return ('BYTE_STRING', Binary, "bytes_value")
         #elif java_type == 'org.apache.phoenix.schema.types.PhoenixArray':
