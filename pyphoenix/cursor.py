@@ -32,7 +32,7 @@ ColumnDescription = collections.namedtuple('ColumnDescription', 'name type_code 
 class Cursor(object):
     """Database cursor for executing queries and iterating over results.
     
-    You should not construct this object manually, use :meth:`Connection.cursor() <phoenixdb.connection.Connection.cursor>` instead.
+    You should not construct this object manually, use :meth:`Connection.cursor() <pyphoenix.connection.Connection.cursor>` instead.
     """
 
     arraysize = 1
@@ -270,7 +270,7 @@ class Cursor(object):
 
     @property
     def connection(self):
-        """Read-only attribute providing access to the :class:`Connection <phoenixdb.connection.Connection>` object this cursor was created from."""
+        """Read-only attribute providing access to the :class:`Connection <pyphoenix.connection.Connection>` object this cursor was created from."""
         return self._connection
 
 

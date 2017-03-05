@@ -123,7 +123,7 @@ ROWID = ColumnType([])
 """Only implemented for DB API 2.0 compatibility, not used."""
 
 BOOLEAN = ColumnType(['BOOLEAN'])
-"""Type object that can be used to describe boolean columns. This is a phoenixdb-specific extension."""
+"""Type object that can be used to describe boolean columns. This is a pyphoenix-specific extension."""
 
 # XXX ARRAY
 

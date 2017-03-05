@@ -16,7 +16,7 @@
  */
 syntax = "proto3";
 
-package phoenixdb;
+package pyphoenix;
 
 // Details about a connection
 message ConnectionProperties {

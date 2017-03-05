@@ -30,7 +30,7 @@ used the same way you would use any other SQL database from Python, for example:
     import pyphoenix
 
     database_url = 'http://localhost:8765/'
-    conn = phoenixdb.connect(database_url, autocommit=True)
+    conn = pyphoenix.connect(database_url, autocommit=True)
 
     cursor = conn.cursor()
     cursor.execute("CREATE TABLE users (id INTEGER PRIMARY KEY, username VARCHAR)")
@@ -92,9 +92,9 @@ Running the test suite
 
 The library comes with a test suite for testing Python DB API 2.0 compliance and
 various Phoenix-specific features. In order to run the test suite, you need a
-working Phoenix database and set the ``PHOENIXDB_TEST_DB_URL`` environment variable::
+working Phoenix database and set the ``pyphoenix_TEST_DB_URL`` environment variable::
 
-    export PHOENIXDB_TEST_DB_URL='http://localhost:8765/'
+    export pyphoenix_TEST_DB_URL='http://localhost:8765/'
     nosetests
 
 Known issues

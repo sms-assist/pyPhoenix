@@ -1,28 +1,28 @@
 API Reference
 =============
 
-phoenixdb module
+pyphoenix module
 ----------------
 
 .. automodule:: pyphoenix
     :members:
     :undoc-members:
 
-phoenixdb.connection module
+pyphoenix.connection module
 ---------------------------
 
 .. automodule:: pyphoenix.connection
     :members:
     :undoc-members:
 
-phoenixdb.cursor module
+pyphoenix.cursor module
 -----------------------
 
 .. automodule:: pyphoenix.cursor
     :members:
     :undoc-members:
 
-phoenixdb.avatica module
+pyphoenix.avatica module
 ------------------------
 
 .. automodule:: pyphoenix.avatica

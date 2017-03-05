@@ -2,10 +2,10 @@ import os
 import unittest
 import pyphoenix
 
-TEST_DB_URL = os.environ.get('PHOENIXDB_TEST_DB_URL')
+TEST_DB_URL = os.environ.get('pyphoenix_TEST_DB_URL')
 
 
-@unittest.skipIf(TEST_DB_URL is None, "these tests require the PHOENIXDB_TEST_DB_URL environment variable set to a clean database")
+@unittest.skipIf(TEST_DB_URL is None, "these tests require the pyphoenix_TEST_DB_URL environment variable set to a clean database")
 class DatabaseTestCase(unittest.TestCase):
     
     def setUp(self):

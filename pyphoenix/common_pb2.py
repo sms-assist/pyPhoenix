@@ -18,15 +18,15 @@ _sym_db = _symbol_database.Default()
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='common.proto',
-  package='phoenixdb',
+  package='pyphoenix',
   syntax='proto3',
-  serialized_pb=_b('\n\x0c\x63ommon.proto\x12\tphoenixdb\"\xc0\x01\n\x14\x43onnectionProperties\x12\x10\n\x08is_dirty\x18\x01 \x01(\x08\x12\x13\n\x0b\x61uto_commit\x18\x02 \x01(\x08\x12\x17\n\x0fhas_auto_commit\x18\x07 \x01(\x08\x12\x11\n\tread_only\x18\x03 \x01(\x08\x12\x15\n\rhas_read_only\x18\x08 \x01(\x08\x12\x1d\n\x15transaction_isolation\x18\x04 \x01(\r\x12\x0f\n\x07\x63\x61talog\x18\x05 \x01(\t\x12\x0e\n\x06schema\x18\x06 \x01(\t\"]\n\x0fStatementHandle\x12\x15\n\rconnection_id\x18\x01 \x01(\t\x12\n\n\x02id\x18\x02 \x01(\r\x12\'\n\tsignature\x18\x03 \x01(\x0b\x32\x14.phoenixdb.Signature\"\xd8\x01\n\tSignature\x12*\n\x07\x63olumns\x18\x01 \x03(\x0b\x32\x19.phoenixdb.ColumnMetaData\x12\x0b\n\x03sql\x18\x02 \x01(\t\x12/\n\nparameters\x18\x03 \x03(\x0b\x32\x1b.phoenixdb.AvaticaParameter\x12\x30\n\x0e\x63ursor_factory\x18\x04 \x01(\x0b\x32\x18.phoenixdb.CursorFactory\x12/\n\rstatementType\x18\x05 \x01(\x0e\x32\x18.phoenixdb.StatementType\"\xb7\x03\n\x0e\x43olumnMetaData\x12\x0f\n\x07ordinal\x18\x01 \x01(\r\x12\x16\n\x0e\x61uto_increment\x18\x02 \x01(\x08\x12\x16\n\x0e\x63\x61se_sensitive\x18\x03 \x01(\x08\x12\x12\n\nsearchable\x18\x04 \x01(\x08\x12\x10\n\x08\x63urrency\x18\x05 \x01(\x08\x12\x10\n\x08nullable\x18\x06 \x01(\r\x12\x0e\n\x06signed\x18\x07 \x01(\x08\x12\x14\n\x0c\x64isplay_size\x18\x08 \x01(\r\x12\r\n\x05label\x18\t \x01(\t\x12\x13\n\x0b\x63olumn_name\x18\n \x01(\t\x12\x13\n\x0bschema_name\x18\x0b \x01(\t\x12\x11\n\tprecision\x18\x0c \x01(\r\x12\r\n\x05scale\x18\r \x01(\r\x12\x12\n\ntable_name\x18\x0e \x01(\t\x12\x14\n\x0c\x63\x61talog_name\x18\x0f \x01(\t\x12\x11\n\tread_only\x18\x10 \x01(\x08\x12\x10\n\x08writable\x18\x11 \x01(\x08\x12\x1b\n\x13\x64\x65\x66initely_writable\x18\x12 \x01(\x08\x12\x19\n\x11\x63olumn_class_name\x18\x13 \x01(\t\x12$\n\x04type\x18\x14 \x01(\x0b\x32\x16.phoenixdb.AvaticaType\"\x9b\x01\n\x0b\x41vaticaType\x12\n\n\x02id\x18\x01 \x01(\r\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x1b\n\x03rep\x18\x03 \x01(\x0e\x32\x0e.phoenixdb.Rep\x12*\n\x07\x63olumns\x18\x04 \x03(\x0b\x32\x19.phoenixdb.ColumnMetaData\x12)\n\tcomponent\x18\x05 \x01(\x0b\x32\x16.phoenixdb.AvaticaType\"\x91\x01\n\x10\x41vaticaParameter\x12\x0e\n\x06signed\x18\x01 \x01(\x08\x12\x11\n\tprecision\x18\x02 \x01(\r\x12\r\n\x05scale\x18\x03 \x01(\r\x12\x16\n\x0eparameter_type\x18\x04 \x01(\r\x12\x11\n\ttype_name\x18\x05 \x01(\t\x12\x12\n\nclass_name\x18\x06 \x01(\t\x12\x0c\n\x04name\x18\x07 \x01(\t\"\xbd\x01\n\rCursorFactory\x12-\n\x05style\x18\x01 \x01(\x0e\x32\x1e.phoenixdb.CursorFactory.Style\x12\x12\n\nclass_name\x18\x02 \x01(\t\x12\x13\n\x0b\x66ield_names\x18\x03 \x03(\t\"T\n\x05Style\x12\n\n\x06OBJECT\x10\x00\x12\n\n\x06RECORD\x10\x01\x12\x15\n\x11RECORD_PROJECTION\x10\x02\x12\t\n\x05\x41RRAY\x10\x03\x12\x08\n\x04LIST\x10\x04\x12\x07\n\x03MAP\x10\x05\"C\n\x05\x46rame\x12\x0e\n\x06offset\x18\x01 \x01(\x04\x12\x0c\n\x04\x64one\x18\x02 \x01(\x08\x12\x1c\n\x04rows\x18\x03 \x03(\x0b\x32\x0e.phoenixdb.Row\",\n\x03Row\x12%\n\x05value\x18\x01 \x03(\x0b\x32\x16.phoenixdb.ColumnValue\"3\n\x10\x44\x61tabaseProperty\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x11\n\tfunctions\x18\x02 \x03(\t\"4\n\x0bWireMessage\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x17\n\x0fwrapped_message\x18\x02 \x01(\x0c\"\xa5\x01\n\x0b\x43olumnValue\x12$\n\x05value\x18\x01 \x03(\x0b\x32\x15.phoenixdb.TypedValue\x12*\n\x0b\x61rray_value\x18\x02 \x03(\x0b\x32\x15.phoenixdb.TypedValue\x12\x17\n\x0fhas_array_value\x18\x03 \x01(\x08\x12+\n\x0cscalar_value\x18\x04 \x01(\x0b\x32\x15.phoenixdb.TypedValue\"\xa3\x01\n\nTypedValue\x12\x1c\n\x04type\x18\x01 \x01(\x0e\x32\x0e.phoenixdb.Rep\x12\x12\n\nbool_value\x18\x02 \x01(\x08\x12\x14\n\x0cstring_value\x18\x03 \x01(\t\x12\x14\n\x0cnumber_value\x18\x04 \x01(\x12\x12\x13\n\x0b\x62ytes_value\x18\x05 \x01(\x0c\x12\x14\n\x0c\x64ouble_value\x18\x06 \x01(\x01\x12\x0c\n\x04null\x18\x07 \x01(\x08\"\xb0\x02\n\x19MetaDataOperationArgument\x12\x14\n\x0cstring_value\x18\x01 \x01(\t\x12\x12\n\nbool_value\x18\x02 \x01(\x08\x12\x11\n\tint_value\x18\x03 \x01(\x11\x12\x1b\n\x13string_array_values\x18\x04 \x03(\t\x12\x18\n\x10int_array_values\x18\x05 \x03(\x11\x12?\n\x04type\x18\x06 \x01(\x0e\x32\x31.phoenixdb.MetaDataOperationArgument.ArgumentType\"^\n\x0c\x41rgumentType\x12\n\n\x06STRING\x10\x00\x12\x08\n\x04\x42OOL\x10\x01\x12\x07\n\x03INT\x10\x02\x12\x13\n\x0fREPEATED_STRING\x10\x03\x12\x10\n\x0cREPEATED_INT\x10\x04\x12\x08\n\x04NULL\x10\x05\"\xce\x01\n\nQueryState\x12\"\n\x04type\x18\x01 \x01(\x0e\x32\x14.phoenixdb.StateType\x12\x0b\n\x03sql\x18\x02 \x01(\t\x12(\n\x02op\x18\x03 \x01(\x0e\x32\x1c.phoenixdb.MetaDataOperation\x12\x32\n\x04\x61rgs\x18\x04 \x03(\x0b\x32$.phoenixdb.MetaDataOperationArgument\x12\x10\n\x08has_args\x18\x05 \x01(\x08\x12\x0f\n\x07has_sql\x18\x06 \x01(\x08\x12\x0e\n\x06has_op\x18\x07 \x01(\x08*\x9f\x01\n\rStatementType\x12\n\n\x06SELECT\x10\x00\x12\n\n\x06INSERT\x10\x01\x12\n\n\x06UPDATE\x10\x02\x12\n\n\x06\x44\x45LETE\x10\x03\x12\n\n\x06UPSERT\x10\x04\x12\t\n\x05MERGE\x10\x05\x12\r\n\tOTHER_DML\x10\x06\x12\n\n\x06\x43REATE\x10\x07\x12\x08\n\x04\x44ROP\x10\x08\x12\t\n\x05\x41LTER\x10\t\x12\r\n\tOTHER_DDL\x10\n\x12\x08\n\x04\x43\x41LL\x10\x0b*\xe2\x03\n\x03Rep\x12\x15\n\x11PRIMITIVE_BOOLEAN\x10\x00\x12\x12\n\x0ePRIMITIVE_BYTE\x10\x01\x12\x12\n\x0ePRIMITIVE_CHAR\x10\x02\x12\x13\n\x0fPRIMITIVE_SHORT\x10\x03\x12\x11\n\rPRIMITIVE_INT\x10\x04\x12\x12\n\x0ePRIMITIVE_LONG\x10\x05\x12\x13\n\x0fPRIMITIVE_FLOAT\x10\x06\x12\x14\n\x10PRIMITIVE_DOUBLE\x10\x07\x12\x0b\n\x07\x42OOLEAN\x10\x08\x12\x08\n\x04\x42YTE\x10\t\x12\r\n\tCHARACTER\x10\n\x12\t\n\x05SHORT\x10\x0b\x12\x0b\n\x07INTEGER\x10\x0c\x12\x08\n\x04LONG\x10\r\x12\t\n\x05\x46LOAT\x10\x0e\x12\n\n\x06\x44OUBLE\x10\x0f\x12\x0f\n\x0b\x42IG_INTEGER\x10\x19\x12\x0f\n\x0b\x42IG_DECIMAL\x10\x1a\x12\x11\n\rJAVA_SQL_TIME\x10\x10\x12\x16\n\x12JAVA_SQL_TIMESTAMP\x10\x11\x12\x11\n\rJAVA_SQL_DATE\x10\x12\x12\x12\n\x0eJAVA_UTIL_DATE\x10\x13\x12\x0f\n\x0b\x42YTE_STRING\x10\x14\x12\n\n\x06STRING\x10\x15\x12\n\n\x06NUMBER\x10\x16\x12\n\n\x06OBJECT\x10\x17\x12\x08\n\x04NULL\x10\x18\x12\t\n\x05\x41RRAY\x10\x1b\x12\n\n\x06STRUCT\x10\x1c\x12\x0c\n\x08MULTISET\x10\x1d*^\n\x08Severity\x12\x14\n\x10UNKNOWN_SEVERITY\x10\x00\x12\x12\n\x0e\x46\x41TAL_SEVERITY\x10\x01\x12\x12\n\x0e\x45RROR_SEVERITY\x10\x02\x12\x14\n\x10WARNING_SEVERITY\x10\x03*\xd7\x04\n\x11MetaDataOperation\x12\x12\n\x0eGET_ATTRIBUTES\x10\x00\x12\x1b\n\x17GET_BEST_ROW_IDENTIFIER\x10\x01\x12\x10\n\x0cGET_CATALOGS\x10\x02\x12\x1e\n\x1aGET_CLIENT_INFO_PROPERTIES\x10\x03\x12\x19\n\x15GET_COLUMN_PRIVILEGES\x10\x04\x12\x0f\n\x0bGET_COLUMNS\x10\x05\x12\x17\n\x13GET_CROSS_REFERENCE\x10\x06\x12\x15\n\x11GET_EXPORTED_KEYS\x10\x07\x12\x18\n\x14GET_FUNCTION_COLUMNS\x10\x08\x12\x11\n\rGET_FUNCTIONS\x10\t\x12\x15\n\x11GET_IMPORTED_KEYS\x10\n\x12\x12\n\x0eGET_INDEX_INFO\x10\x0b\x12\x14\n\x10GET_PRIMARY_KEYS\x10\x0c\x12\x19\n\x15GET_PROCEDURE_COLUMNS\x10\r\x12\x12\n\x0eGET_PROCEDURES\x10\x0e\x12\x16\n\x12GET_PSEUDO_COLUMNS\x10\x0f\x12\x0f\n\x0bGET_SCHEMAS\x10\x10\x12\x19\n\x15GET_SCHEMAS_WITH_ARGS\x10\x11\x12\x14\n\x10GET_SUPER_TABLES\x10\x12\x12\x13\n\x0fGET_SUPER_TYPES\x10\x13\x12\x18\n\x14GET_TABLE_PRIVILEGES\x10\x14\x12\x0e\n\nGET_TABLES\x10\x15\x12\x13\n\x0fGET_TABLE_TYPES\x10\x16\x12\x11\n\rGET_TYPE_INFO\x10\x17\x12\x0c\n\x08GET_UDTS\x10\x18\x12\x17\n\x13GET_VERSION_COLUMNS\x10\x19*\"\n\tStateType\x12\x07\n\x03SQL\x10\x00\x12\x0c\n\x08METADATA\x10\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x0c\x63ommon.proto\x12\tpyphoenix\"\xc0\x01\n\x14\x43onnectionProperties\x12\x10\n\x08is_dirty\x18\x01 \x01(\x08\x12\x13\n\x0b\x61uto_commit\x18\x02 \x01(\x08\x12\x17\n\x0fhas_auto_commit\x18\x07 \x01(\x08\x12\x11\n\tread_only\x18\x03 \x01(\x08\x12\x15\n\rhas_read_only\x18\x08 \x01(\x08\x12\x1d\n\x15transaction_isolation\x18\x04 \x01(\r\x12\x0f\n\x07\x63\x61talog\x18\x05 \x01(\t\x12\x0e\n\x06schema\x18\x06 \x01(\t\"]\n\x0fStatementHandle\x12\x15\n\rconnection_id\x18\x01 \x01(\t\x12\n\n\x02id\x18\x02 \x01(\r\x12\'\n\tsignature\x18\x03 \x01(\x0b\x32\x14.pyphoenix.Signature\"\xd8\x01\n\tSignature\x12*\n\x07\x63olumns\x18\x01 \x03(\x0b\x32\x19.pyphoenix.ColumnMetaData\x12\x0b\n\x03sql\x18\x02 \x01(\t\x12/\n\nparameters\x18\x03 \x03(\x0b\x32\x1b.pyphoenix.AvaticaParameter\x12\x30\n\x0e\x63ursor_factory\x18\x04 \x01(\x0b\x32\x18.pyphoenix.CursorFactory\x12/\n\rstatementType\x18\x05 \x01(\x0e\x32\x18.pyphoenix.StatementType\"\xb7\x03\n\x0e\x43olumnMetaData\x12\x0f\n\x07ordinal\x18\x01 \x01(\r\x12\x16\n\x0e\x61uto_increment\x18\x02 \x01(\x08\x12\x16\n\x0e\x63\x61se_sensitive\x18\x03 \x01(\x08\x12\x12\n\nsearchable\x18\x04 \x01(\x08\x12\x10\n\x08\x63urrency\x18\x05 \x01(\x08\x12\x10\n\x08nullable\x18\x06 \x01(\r\x12\x0e\n\x06signed\x18\x07 \x01(\x08\x12\x14\n\x0c\x64isplay_size\x18\x08 \x01(\r\x12\r\n\x05label\x18\t \x01(\t\x12\x13\n\x0b\x63olumn_name\x18\n \x01(\t\x12\x13\n\x0bschema_name\x18\x0b \x01(\t\x12\x11\n\tprecision\x18\x0c \x01(\r\x12\r\n\x05scale\x18\r \x01(\r\x12\x12\n\ntable_name\x18\x0e \x01(\t\x12\x14\n\x0c\x63\x61talog_name\x18\x0f \x01(\t\x12\x11\n\tread_only\x18\x10 \x01(\x08\x12\x10\n\x08writable\x18\x11 \x01(\x08\x12\x1b\n\x13\x64\x65\x66initely_writable\x18\x12 \x01(\x08\x12\x19\n\x11\x63olumn_class_name\x18\x13 \x01(\t\x12$\n\x04type\x18\x14 \x01(\x0b\x32\x16.pyphoenix.AvaticaType\"\x9b\x01\n\x0b\x41vaticaType\x12\n\n\x02id\x18\x01 \x01(\r\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x1b\n\x03rep\x18\x03 \x01(\x0e\x32\x0e.pyphoenix.Rep\x12*\n\x07\x63olumns\x18\x04 \x03(\x0b\x32\x19.pyphoenix.ColumnMetaData\x12)\n\tcomponent\x18\x05 \x01(\x0b\x32\x16.pyphoenix.AvaticaType\"\x91\x01\n\x10\x41vaticaParameter\x12\x0e\n\x06signed\x18\x01 \x01(\x08\x12\x11\n\tprecision\x18\x02 \x01(\r\x12\r\n\x05scale\x18\x03 \x01(\r\x12\x16\n\x0eparameter_type\x18\x04 \x01(\r\x12\x11\n\ttype_name\x18\x05 \x01(\t\x12\x12\n\nclass_name\x18\x06 \x01(\t\x12\x0c\n\x04name\x18\x07 \x01(\t\"\xbd\x01\n\rCursorFactory\x12-\n\x05style\x18\x01 \x01(\x0e\x32\x1e.pyphoenix.CursorFactory.Style\x12\x12\n\nclass_name\x18\x02 \x01(\t\x12\x13\n\x0b\x66ield_names\x18\x03 \x03(\t\"T\n\x05Style\x12\n\n\x06OBJECT\x10\x00\x12\n\n\x06RECORD\x10\x01\x12\x15\n\x11RECORD_PROJECTION\x10\x02\x12\t\n\x05\x41RRAY\x10\x03\x12\x08\n\x04LIST\x10\x04\x12\x07\n\x03MAP\x10\x05\"C\n\x05\x46rame\x12\x0e\n\x06offset\x18\x01 \x01(\x04\x12\x0c\n\x04\x64one\x18\x02 \x01(\x08\x12\x1c\n\x04rows\x18\x03 \x03(\x0b\x32\x0e.pyphoenix.Row\",\n\x03Row\x12%\n\x05value\x18\x01 \x03(\x0b\x32\x16.pyphoenix.ColumnValue\"3\n\x10\x44\x61tabaseProperty\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x11\n\tfunctions\x18\x02 \x03(\t\"4\n\x0bWireMessage\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x17\n\x0fwrapped_message\x18\x02 \x01(\x0c\"\xa5\x01\n\x0b\x43olumnValue\x12$\n\x05value\x18\x01 \x03(\x0b\x32\x15.pyphoenix.TypedValue\x12*\n\x0b\x61rray_value\x18\x02 \x03(\x0b\x32\x15.pyphoenix.TypedValue\x12\x17\n\x0fhas_array_value\x18\x03 \x01(\x08\x12+\n\x0cscalar_value\x18\x04 \x01(\x0b\x32\x15.pyphoenix.TypedValue\"\xa3\x01\n\nTypedValue\x12\x1c\n\x04type\x18\x01 \x01(\x0e\x32\x0e.pyphoenix.Rep\x12\x12\n\nbool_value\x18\x02 \x01(\x08\x12\x14\n\x0cstring_value\x18\x03 \x01(\t\x12\x14\n\x0cnumber_value\x18\x04 \x01(\x12\x12\x13\n\x0b\x62ytes_value\x18\x05 \x01(\x0c\x12\x14\n\x0c\x64ouble_value\x18\x06 \x01(\x01\x12\x0c\n\x04null\x18\x07 \x01(\x08\"\xb0\x02\n\x19MetaDataOperationArgument\x12\x14\n\x0cstring_value\x18\x01 \x01(\t\x12\x12\n\nbool_value\x18\x02 \x01(\x08\x12\x11\n\tint_value\x18\x03 \x01(\x11\x12\x1b\n\x13string_array_values\x18\x04 \x03(\t\x12\x18\n\x10int_array_values\x18\x05 \x03(\x11\x12?\n\x04type\x18\x06 \x01(\x0e\x32\x31.pyphoenix.MetaDataOperationArgument.ArgumentType\"^\n\x0c\x41rgumentType\x12\n\n\x06STRING\x10\x00\x12\x08\n\x04\x42OOL\x10\x01\x12\x07\n\x03INT\x10\x02\x12\x13\n\x0fREPEATED_STRING\x10\x03\x12\x10\n\x0cREPEATED_INT\x10\x04\x12\x08\n\x04NULL\x10\x05\"\xce\x01\n\nQueryState\x12\"\n\x04type\x18\x01 \x01(\x0e\x32\x14.pyphoenix.StateType\x12\x0b\n\x03sql\x18\x02 \x01(\t\x12(\n\x02op\x18\x03 \x01(\x0e\x32\x1c.pyphoenix.MetaDataOperation\x12\x32\n\x04\x61rgs\x18\x04 \x03(\x0b\x32$.pyphoenix.MetaDataOperationArgument\x12\x10\n\x08has_args\x18\x05 \x01(\x08\x12\x0f\n\x07has_sql\x18\x06 \x01(\x08\x12\x0e\n\x06has_op\x18\x07 \x01(\x08*\x9f\x01\n\rStatementType\x12\n\n\x06SELECT\x10\x00\x12\n\n\x06INSERT\x10\x01\x12\n\n\x06UPDATE\x10\x02\x12\n\n\x06\x44\x45LETE\x10\x03\x12\n\n\x06UPSERT\x10\x04\x12\t\n\x05MERGE\x10\x05\x12\r\n\tOTHER_DML\x10\x06\x12\n\n\x06\x43REATE\x10\x07\x12\x08\n\x04\x44ROP\x10\x08\x12\t\n\x05\x41LTER\x10\t\x12\r\n\tOTHER_DDL\x10\n\x12\x08\n\x04\x43\x41LL\x10\x0b*\xe2\x03\n\x03Rep\x12\x15\n\x11PRIMITIVE_BOOLEAN\x10\x00\x12\x12\n\x0ePRIMITIVE_BYTE\x10\x01\x12\x12\n\x0ePRIMITIVE_CHAR\x10\x02\x12\x13\n\x0fPRIMITIVE_SHORT\x10\x03\x12\x11\n\rPRIMITIVE_INT\x10\x04\x12\x12\n\x0ePRIMITIVE_LONG\x10\x05\x12\x13\n\x0fPRIMITIVE_FLOAT\x10\x06\x12\x14\n\x10PRIMITIVE_DOUBLE\x10\x07\x12\x0b\n\x07\x42OOLEAN\x10\x08\x12\x08\n\x04\x42YTE\x10\t\x12\r\n\tCHARACTER\x10\n\x12\t\n\x05SHORT\x10\x0b\x12\x0b\n\x07INTEGER\x10\x0c\x12\x08\n\x04LONG\x10\r\x12\t\n\x05\x46LOAT\x10\x0e\x12\n\n\x06\x44OUBLE\x10\x0f\x12\x0f\n\x0b\x42IG_INTEGER\x10\x19\x12\x0f\n\x0b\x42IG_DECIMAL\x10\x1a\x12\x11\n\rJAVA_SQL_TIME\x10\x10\x12\x16\n\x12JAVA_SQL_TIMESTAMP\x10\x11\x12\x11\n\rJAVA_SQL_DATE\x10\x12\x12\x12\n\x0eJAVA_UTIL_DATE\x10\x13\x12\x0f\n\x0b\x42YTE_STRING\x10\x14\x12\n\n\x06STRING\x10\x15\x12\n\n\x06NUMBER\x10\x16\x12\n\n\x06OBJECT\x10\x17\x12\x08\n\x04NULL\x10\x18\x12\t\n\x05\x41RRAY\x10\x1b\x12\n\n\x06STRUCT\x10\x1c\x12\x0c\n\x08MULTISET\x10\x1d*^\n\x08Severity\x12\x14\n\x10UNKNOWN_SEVERITY\x10\x00\x12\x12\n\x0e\x46\x41TAL_SEVERITY\x10\x01\x12\x12\n\x0e\x45RROR_SEVERITY\x10\x02\x12\x14\n\x10WARNING_SEVERITY\x10\x03*\xd7\x04\n\x11MetaDataOperation\x12\x12\n\x0eGET_ATTRIBUTES\x10\x00\x12\x1b\n\x17GET_BEST_ROW_IDENTIFIER\x10\x01\x12\x10\n\x0cGET_CATALOGS\x10\x02\x12\x1e\n\x1aGET_CLIENT_INFO_PROPERTIES\x10\x03\x12\x19\n\x15GET_COLUMN_PRIVILEGES\x10\x04\x12\x0f\n\x0bGET_COLUMNS\x10\x05\x12\x17\n\x13GET_CROSS_REFERENCE\x10\x06\x12\x15\n\x11GET_EXPORTED_KEYS\x10\x07\x12\x18\n\x14GET_FUNCTION_COLUMNS\x10\x08\x12\x11\n\rGET_FUNCTIONS\x10\t\x12\x15\n\x11GET_IMPORTED_KEYS\x10\n\x12\x12\n\x0eGET_INDEX_INFO\x10\x0b\x12\x14\n\x10GET_PRIMARY_KEYS\x10\x0c\x12\x19\n\x15GET_PROCEDURE_COLUMNS\x10\r\x12\x12\n\x0eGET_PROCEDURES\x10\x0e\x12\x16\n\x12GET_PSEUDO_COLUMNS\x10\x0f\x12\x0f\n\x0bGET_SCHEMAS\x10\x10\x12\x19\n\x15GET_SCHEMAS_WITH_ARGS\x10\x11\x12\x14\n\x10GET_SUPER_TABLES\x10\x12\x12\x13\n\x0fGET_SUPER_TYPES\x10\x13\x12\x18\n\x14GET_TABLE_PRIVILEGES\x10\x14\x12\x0e\n\nGET_TABLES\x10\x15\x12\x13\n\x0fGET_TABLE_TYPES\x10\x16\x12\x11\n\rGET_TYPE_INFO\x10\x17\x12\x0c\n\x08GET_UDTS\x10\x18\x12\x17\n\x13GET_VERSION_COLUMNS\x10\x19*\"\n\tStateType\x12\x07\n\x03SQL\x10\x00\x12\x0c\n\x08METADATA\x10\x01\x62\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 _STATEMENTTYPE = _descriptor.EnumDescriptor(
   name='StatementType',
-  full_name='phoenixdb.StatementType',
+  full_name='pyphoenix.StatementType',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -89,7 +89,7 @@ _sym_db.RegisterEnumDescriptor(_STATEMENTTYPE)
 StatementType = enum_type_wrapper.EnumTypeWrapper(_STATEMENTTYPE)
 _REP = _descriptor.EnumDescriptor(
   name='Rep',
-  full_name='phoenixdb.Rep',
+  full_name='pyphoenix.Rep',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -224,7 +224,7 @@ _sym_db.RegisterEnumDescriptor(_REP)
 Rep = enum_type_wrapper.EnumTypeWrapper(_REP)
 _SEVERITY = _descriptor.EnumDescriptor(
   name='Severity',
-  full_name='phoenixdb.Severity',
+  full_name='pyphoenix.Severity',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -255,7 +255,7 @@ _sym_db.RegisterEnumDescriptor(_SEVERITY)
 Severity = enum_type_wrapper.EnumTypeWrapper(_SEVERITY)
 _METADATAOPERATION = _descriptor.EnumDescriptor(
   name='MetaDataOperation',
-  full_name='phoenixdb.MetaDataOperation',
+  full_name='pyphoenix.MetaDataOperation',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -374,7 +374,7 @@ _sym_db.RegisterEnumDescriptor(_METADATAOPERATION)
 MetaDataOperation = enum_type_wrapper.EnumTypeWrapper(_METADATAOPERATION)
 _STATETYPE = _descriptor.EnumDescriptor(
   name='StateType',
-  full_name='phoenixdb.StateType',
+  full_name='pyphoenix.StateType',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -473,7 +473,7 @@ METADATA = 1
 
 _CURSORFACTORY_STYLE = _descriptor.EnumDescriptor(
   name='Style',
-  full_name='phoenixdb.CursorFactory.Style',
+  full_name='pyphoenix.CursorFactory.Style',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -511,7 +511,7 @@ _sym_db.RegisterEnumDescriptor(_CURSORFACTORY_STYLE)
 
 _METADATAOPERATIONARGUMENT_ARGUMENTTYPE = _descriptor.EnumDescriptor(
   name='ArgumentType',
-  full_name='phoenixdb.MetaDataOperationArgument.ArgumentType',
+  full_name='pyphoenix.MetaDataOperationArgument.ArgumentType',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -550,62 +550,62 @@ _sym_db.RegisterEnumDescriptor(_METADATAOPERATIONARGUMENT_ARGUMENTTYPE)
 
 _CONNECTIONPROPERTIES = _descriptor.Descriptor(
   name='ConnectionProperties',
-  full_name='phoenixdb.ConnectionProperties',
+  full_name='pyphoenix.ConnectionProperties',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='is_dirty', full_name='phoenixdb.ConnectionProperties.is_dirty', index=0,
+      name='is_dirty', full_name='pyphoenix.ConnectionProperties.is_dirty', index=0,
       number=1, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='auto_commit', full_name='phoenixdb.ConnectionProperties.auto_commit', index=1,
+      name='auto_commit', full_name='pyphoenix.ConnectionProperties.auto_commit', index=1,
       number=2, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='has_auto_commit', full_name='phoenixdb.ConnectionProperties.has_auto_commit', index=2,
+      name='has_auto_commit', full_name='pyphoenix.ConnectionProperties.has_auto_commit', index=2,
       number=7, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='read_only', full_name='phoenixdb.ConnectionProperties.read_only', index=3,
+      name='read_only', full_name='pyphoenix.ConnectionProperties.read_only', index=3,
       number=3, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='has_read_only', full_name='phoenixdb.ConnectionProperties.has_read_only', index=4,
+      name='has_read_only', full_name='pyphoenix.ConnectionProperties.has_read_only', index=4,
       number=8, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='transaction_isolation', full_name='phoenixdb.ConnectionProperties.transaction_isolation', index=5,
+      name='transaction_isolation', full_name='pyphoenix.ConnectionProperties.transaction_isolation', index=5,
       number=4, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='catalog', full_name='phoenixdb.ConnectionProperties.catalog', index=6,
+      name='catalog', full_name='pyphoenix.ConnectionProperties.catalog', index=6,
       number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='schema', full_name='phoenixdb.ConnectionProperties.schema', index=7,
+      name='schema', full_name='pyphoenix.ConnectionProperties.schema', index=7,
       number=6, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -630,27 +630,27 @@ _CONNECTIONPROPERTIES = _descriptor.Descriptor(
 
 _STATEMENTHANDLE = _descriptor.Descriptor(
   name='StatementHandle',
-  full_name='phoenixdb.StatementHandle',
+  full_name='pyphoenix.StatementHandle',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='connection_id', full_name='phoenixdb.StatementHandle.connection_id', index=0,
+      name='connection_id', full_name='pyphoenix.StatementHandle.connection_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='id', full_name='phoenixdb.StatementHandle.id', index=1,
+      name='id', full_name='pyphoenix.StatementHandle.id', index=1,
       number=2, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='signature', full_name='phoenixdb.StatementHandle.signature', index=2,
+      name='signature', full_name='pyphoenix.StatementHandle.signature', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -675,41 +675,41 @@ _STATEMENTHANDLE = _descriptor.Descriptor(
 
 _SIGNATURE = _descriptor.Descriptor(
   name='Signature',
-  full_name='phoenixdb.Signature',
+  full_name='pyphoenix.Signature',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='columns', full_name='phoenixdb.Signature.columns', index=0,
+      name='columns', full_name='pyphoenix.Signature.columns', index=0,
       number=1, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='sql', full_name='phoenixdb.Signature.sql', index=1,
+      name='sql', full_name='pyphoenix.Signature.sql', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='parameters', full_name='phoenixdb.Signature.parameters', index=2,
+      name='parameters', full_name='pyphoenix.Signature.parameters', index=2,
       number=3, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='cursor_factory', full_name='phoenixdb.Signature.cursor_factory', index=3,
+      name='cursor_factory', full_name='pyphoenix.Signature.cursor_factory', index=3,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='statementType', full_name='phoenixdb.Signature.statementType', index=4,
+      name='statementType', full_name='pyphoenix.Signature.statementType', index=4,
       number=5, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -734,146 +734,146 @@ _SIGNATURE = _descriptor.Descriptor(
 
 _COLUMNMETADATA = _descriptor.Descriptor(
   name='ColumnMetaData',
-  full_name='phoenixdb.ColumnMetaData',
+  full_name='pyphoenix.ColumnMetaData',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='ordinal', full_name='phoenixdb.ColumnMetaData.ordinal', index=0,
+      name='ordinal', full_name='pyphoenix.ColumnMetaData.ordinal', index=0,
       number=1, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='auto_increment', full_name='phoenixdb.ColumnMetaData.auto_increment', index=1,
+      name='auto_increment', full_name='pyphoenix.ColumnMetaData.auto_increment', index=1,
       number=2, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='case_sensitive', full_name='phoenixdb.ColumnMetaData.case_sensitive', index=2,
+      name='case_sensitive', full_name='pyphoenix.ColumnMetaData.case_sensitive', index=2,
       number=3, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='searchable', full_name='phoenixdb.ColumnMetaData.searchable', index=3,
+      name='searchable', full_name='pyphoenix.ColumnMetaData.searchable', index=3,
       number=4, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='currency', full_name='phoenixdb.ColumnMetaData.currency', index=4,
+      name='currency', full_name='pyphoenix.ColumnMetaData.currency', index=4,
       number=5, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='nullable', full_name='phoenixdb.ColumnMetaData.nullable', index=5,
+      name='nullable', full_name='pyphoenix.ColumnMetaData.nullable', index=5,
       number=6, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='signed', full_name='phoenixdb.ColumnMetaData.signed', index=6,
+      name='signed', full_name='pyphoenix.ColumnMetaData.signed', index=6,
       number=7, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='display_size', full_name='phoenixdb.ColumnMetaData.display_size', index=7,
+      name='display_size', full_name='pyphoenix.ColumnMetaData.display_size', index=7,
       number=8, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='label', full_name='phoenixdb.ColumnMetaData.label', index=8,
+      name='label', full_name='pyphoenix.ColumnMetaData.label', index=8,
       number=9, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='column_name', full_name='phoenixdb.ColumnMetaData.column_name', index=9,
+      name='column_name', full_name='pyphoenix.ColumnMetaData.column_name', index=9,
       number=10, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='schema_name', full_name='phoenixdb.ColumnMetaData.schema_name', index=10,
+      name='schema_name', full_name='pyphoenix.ColumnMetaData.schema_name', index=10,
       number=11, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='precision', full_name='phoenixdb.ColumnMetaData.precision', index=11,
+      name='precision', full_name='pyphoenix.ColumnMetaData.precision', index=11,
       number=12, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='scale', full_name='phoenixdb.ColumnMetaData.scale', index=12,
+      name='scale', full_name='pyphoenix.ColumnMetaData.scale', index=12,
       number=13, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='table_name', full_name='phoenixdb.ColumnMetaData.table_name', index=13,
+      name='table_name', full_name='pyphoenix.ColumnMetaData.table_name', index=13,
       number=14, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='catalog_name', full_name='phoenixdb.ColumnMetaData.catalog_name', index=14,
+      name='catalog_name', full_name='pyphoenix.ColumnMetaData.catalog_name', index=14,
       number=15, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='read_only', full_name='phoenixdb.ColumnMetaData.read_only', index=15,
+      name='read_only', full_name='pyphoenix.ColumnMetaData.read_only', index=15,
       number=16, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='writable', full_name='phoenixdb.ColumnMetaData.writable', index=16,
+      name='writable', full_name='pyphoenix.ColumnMetaData.writable', index=16,
       number=17, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='definitely_writable', full_name='phoenixdb.ColumnMetaData.definitely_writable', index=17,
+      name='definitely_writable', full_name='pyphoenix.ColumnMetaData.definitely_writable', index=17,
       number=18, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='column_class_name', full_name='phoenixdb.ColumnMetaData.column_class_name', index=18,
+      name='column_class_name', full_name='pyphoenix.ColumnMetaData.column_class_name', index=18,
       number=19, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='type', full_name='phoenixdb.ColumnMetaData.type', index=19,
+      name='type', full_name='pyphoenix.ColumnMetaData.type', index=19,
       number=20, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -898,41 +898,41 @@ _COLUMNMETADATA = _descriptor.Descriptor(
 
 _AVATICATYPE = _descriptor.Descriptor(
   name='AvaticaType',
-  full_name='phoenixdb.AvaticaType',
+  full_name='pyphoenix.AvaticaType',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='id', full_name='phoenixdb.AvaticaType.id', index=0,
+      name='id', full_name='pyphoenix.AvaticaType.id', index=0,
       number=1, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='name', full_name='phoenixdb.AvaticaType.name', index=1,
+      name='name', full_name='pyphoenix.AvaticaType.name', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='rep', full_name='phoenixdb.AvaticaType.rep', index=2,
+      name='rep', full_name='pyphoenix.AvaticaType.rep', index=2,
       number=3, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='columns', full_name='phoenixdb.AvaticaType.columns', index=3,
+      name='columns', full_name='pyphoenix.AvaticaType.columns', index=3,
       number=4, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='component', full_name='phoenixdb.AvaticaType.component', index=4,
+      name='component', full_name='pyphoenix.AvaticaType.component', index=4,
       number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -957,55 +957,55 @@ _AVATICATYPE = _descriptor.Descriptor(
 
 _AVATICAPARAMETER = _descriptor.Descriptor(
   name='AvaticaParameter',
-  full_name='phoenixdb.AvaticaParameter',
+  full_name='pyphoenix.AvaticaParameter',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='signed', full_name='phoenixdb.AvaticaParameter.signed', index=0,
+      name='signed', full_name='pyphoenix.AvaticaParameter.signed', index=0,
       number=1, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='precision', full_name='phoenixdb.AvaticaParameter.precision', index=1,
+      name='precision', full_name='pyphoenix.AvaticaParameter.precision', index=1,
       number=2, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='scale', full_name='phoenixdb.AvaticaParameter.scale', index=2,
+      name='scale', full_name='pyphoenix.AvaticaParameter.scale', index=2,
       number=3, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='parameter_type', full_name='phoenixdb.AvaticaParameter.parameter_type', index=3,
+      name='parameter_type', full_name='pyphoenix.AvaticaParameter.parameter_type', index=3,
       number=4, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='type_name', full_name='phoenixdb.AvaticaParameter.type_name', index=4,
+      name='type_name', full_name='pyphoenix.AvaticaParameter.type_name', index=4,
       number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='class_name', full_name='phoenixdb.AvaticaParameter.class_name', index=5,
+      name='class_name', full_name='pyphoenix.AvaticaParameter.class_name', index=5,
       number=6, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='name', full_name='phoenixdb.AvaticaParameter.name', index=6,
+      name='name', full_name='pyphoenix.AvaticaParameter.name', index=6,
       number=7, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -1030,27 +1030,27 @@ _AVATICAPARAMETER = _descriptor.Descriptor(
 
 _CURSORFACTORY = _descriptor.Descriptor(
   name='CursorFactory',
-  full_name='phoenixdb.CursorFactory',
+  full_name='pyphoenix.CursorFactory',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='style', full_name='phoenixdb.CursorFactory.style', index=0,
+      name='style', full_name='pyphoenix.CursorFactory.style', index=0,
       number=1, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='class_name', full_name='phoenixdb.CursorFactory.class_name', index=1,
+      name='class_name', full_name='pyphoenix.CursorFactory.class_name', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='field_names', full_name='phoenixdb.CursorFactory.field_names', index=2,
+      name='field_names', full_name='pyphoenix.CursorFactory.field_names', index=2,
       number=3, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -1076,27 +1076,27 @@ _CURSORFACTORY = _descriptor.Descriptor(
 
 _FRAME = _descriptor.Descriptor(
   name='Frame',
-  full_name='phoenixdb.Frame',
+  full_name='pyphoenix.Frame',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='offset', full_name='phoenixdb.Frame.offset', index=0,
+      name='offset', full_name='pyphoenix.Frame.offset', index=0,
       number=1, type=4, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='done', full_name='phoenixdb.Frame.done', index=1,
+      name='done', full_name='pyphoenix.Frame.done', index=1,
       number=2, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='rows', full_name='phoenixdb.Frame.rows', index=2,
+      name='rows', full_name='pyphoenix.Frame.rows', index=2,
       number=3, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -1121,13 +1121,13 @@ _FRAME = _descriptor.Descriptor(
 
 _ROW = _descriptor.Descriptor(
   name='Row',
-  full_name='phoenixdb.Row',
+  full_name='pyphoenix.Row',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='value', full_name='phoenixdb.Row.value', index=0,
+      name='value', full_name='pyphoenix.Row.value', index=0,
       number=1, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -1152,20 +1152,20 @@ _ROW = _descriptor.Descriptor(
 
 _DATABASEPROPERTY = _descriptor.Descriptor(
   name='DatabaseProperty',
-  full_name='phoenixdb.DatabaseProperty',
+  full_name='pyphoenix.DatabaseProperty',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='name', full_name='phoenixdb.DatabaseProperty.name', index=0,
+      name='name', full_name='pyphoenix.DatabaseProperty.name', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='functions', full_name='phoenixdb.DatabaseProperty.functions', index=1,
+      name='functions', full_name='pyphoenix.DatabaseProperty.functions', index=1,
       number=2, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -1190,20 +1190,20 @@ _DATABASEPROPERTY = _descriptor.Descriptor(
 
 _WIREMESSAGE = _descriptor.Descriptor(
   name='WireMessage',
-  full_name='phoenixdb.WireMessage',
+  full_name='pyphoenix.WireMessage',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='name', full_name='phoenixdb.WireMessage.name', index=0,
+      name='name', full_name='pyphoenix.WireMessage.name', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='wrapped_message', full_name='phoenixdb.WireMessage.wrapped_message', index=1,
+      name='wrapped_message', full_name='pyphoenix.WireMessage.wrapped_message', index=1,
       number=2, type=12, cpp_type=9, label=1,
       has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
@@ -1228,34 +1228,34 @@ _WIREMESSAGE = _descriptor.Descriptor(
 
 _COLUMNVALUE = _descriptor.Descriptor(
   name='ColumnValue',
-  full_name='phoenixdb.ColumnValue',
+  full_name='pyphoenix.ColumnValue',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='value', full_name='phoenixdb.ColumnValue.value', index=0,
+      name='value', full_name='pyphoenix.ColumnValue.value', index=0,
       number=1, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='array_value', full_name='phoenixdb.ColumnValue.array_value', index=1,
+      name='array_value', full_name='pyphoenix.ColumnValue.array_value', index=1,
       number=2, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='has_array_value', full_name='phoenixdb.ColumnValue.has_array_value', index=2,
+      name='has_array_value', full_name='pyphoenix.ColumnValue.has_array_value', index=2,
       number=3, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='scalar_value', full_name='phoenixdb.ColumnValue.scalar_value', index=3,
+      name='scalar_value', full_name='pyphoenix.ColumnValue.scalar_value', index=3,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -1280,55 +1280,55 @@ _COLUMNVALUE = _descriptor.Descriptor(
 
 _TYPEDVALUE = _descriptor.Descriptor(
   name='TypedValue',
-  full_name='phoenixdb.TypedValue',
+  full_name='pyphoenix.TypedValue',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='type', full_name='phoenixdb.TypedValue.type', index=0,
+      name='type', full_name='pyphoenix.TypedValue.type', index=0,
       number=1, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='bool_value', full_name='phoenixdb.TypedValue.bool_value', index=1,
+      name='bool_value', full_name='pyphoenix.TypedValue.bool_value', index=1,
       number=2, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='string_value', full_name='phoenixdb.TypedValue.string_value', index=2,
+      name='string_value', full_name='pyphoenix.TypedValue.string_value', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='number_value', full_name='phoenixdb.TypedValue.number_value', index=3,
+      name='number_value', full_name='pyphoenix.TypedValue.number_value', index=3,
       number=4, type=18, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='bytes_value', full_name='phoenixdb.TypedValue.bytes_value', index=4,
+      name='bytes_value', full_name='pyphoenix.TypedValue.bytes_value', index=4,
       number=5, type=12, cpp_type=9, label=1,
       has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='double_value', full_name='phoenixdb.TypedValue.double_value', index=5,
+      name='double_value', full_name='pyphoenix.TypedValue.double_value', index=5,
       number=6, type=1, cpp_type=5, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='null', full_name='phoenixdb.TypedValue.null', index=6,
+      name='null', full_name='pyphoenix.TypedValue.null', index=6,
       number=7, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
@@ -1353,48 +1353,48 @@ _TYPEDVALUE = _descriptor.Descriptor(
 
 _METADATAOPERATIONARGUMENT = _descriptor.Descriptor(
   name='MetaDataOperationArgument',
-  full_name='phoenixdb.MetaDataOperationArgument',
+  full_name='pyphoenix.MetaDataOperationArgument',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='string_value', full_name='phoenixdb.MetaDataOperationArgument.string_value', index=0,
+      name='string_value', full_name='pyphoenix.MetaDataOperationArgument.string_value', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='bool_value', full_name='phoenixdb.MetaDataOperationArgument.bool_value', index=1,
+      name='bool_value', full_name='pyphoenix.MetaDataOperationArgument.bool_value', index=1,
       number=2, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='int_value', full_name='phoenixdb.MetaDataOperationArgument.int_value', index=2,
+      name='int_value', full_name='pyphoenix.MetaDataOperationArgument.int_value', index=2,
       number=3, type=17, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='string_array_values', full_name='phoenixdb.MetaDataOperationArgument.string_array_values', index=3,
+      name='string_array_values', full_name='pyphoenix.MetaDataOperationArgument.string_array_values', index=3,
       number=4, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='int_array_values', full_name='phoenixdb.MetaDataOperationArgument.int_array_values', index=4,
+      name='int_array_values', full_name='pyphoenix.MetaDataOperationArgument.int_array_values', index=4,
       number=5, type=17, cpp_type=1, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='type', full_name='phoenixdb.MetaDataOperationArgument.type', index=5,
+      name='type', full_name='pyphoenix.MetaDataOperationArgument.type', index=5,
       number=6, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -1420,55 +1420,55 @@ _METADATAOPERATIONARGUMENT = _descriptor.Descriptor(
 
 _QUERYSTATE = _descriptor.Descriptor(
   name='QueryState',
-  full_name='phoenixdb.QueryState',
+  full_name='pyphoenix.QueryState',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='type', full_name='phoenixdb.QueryState.type', index=0,
+      name='type', full_name='pyphoenix.QueryState.type', index=0,
       number=1, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='sql', full_name='phoenixdb.QueryState.sql', index=1,
+      name='sql', full_name='pyphoenix.QueryState.sql', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='op', full_name='phoenixdb.QueryState.op', index=2,
+      name='op', full_name='pyphoenix.QueryState.op', index=2,
       number=3, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='args', full_name='phoenixdb.QueryState.args', index=3,
+      name='args', full_name='pyphoenix.QueryState.args', index=3,
       number=4, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='has_args', full_name='phoenixdb.QueryState.has_args', index=4,
+      name='has_args', full_name='pyphoenix.QueryState.has_args', index=4,
       number=5, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='has_sql', full_name='phoenixdb.QueryState.has_sql', index=5,
+      name='has_sql', full_name='pyphoenix.QueryState.has_sql', index=5,
       number=6, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='has_op', full_name='phoenixdb.QueryState.has_op', index=6,
+      name='has_op', full_name='pyphoenix.QueryState.has_op', index=6,
       number=7, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
@@ -1536,105 +1536,105 @@ DESCRIPTOR.enum_types_by_name['StateType'] = _STATETYPE
 ConnectionProperties = _reflection.GeneratedProtocolMessageType('ConnectionProperties', (_message.Message,), dict(
   DESCRIPTOR = _CONNECTIONPROPERTIES,
   __module__ = 'common_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.ConnectionProperties)
+  # @@protoc_insertion_point(class_scope:pyphoenix.ConnectionProperties)
   ))
 _sym_db.RegisterMessage(ConnectionProperties)
 
 StatementHandle = _reflection.GeneratedProtocolMessageType('StatementHandle', (_message.Message,), dict(
   DESCRIPTOR = _STATEMENTHANDLE,
   __module__ = 'common_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.StatementHandle)
+  # @@protoc_insertion_point(class_scope:pyphoenix.StatementHandle)
   ))
 _sym_db.RegisterMessage(StatementHandle)
 
 Signature = _reflection.GeneratedProtocolMessageType('Signature', (_message.Message,), dict(
   DESCRIPTOR = _SIGNATURE,
   __module__ = 'common_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.Signature)
+  # @@protoc_insertion_point(class_scope:pyphoenix.Signature)
   ))
 _sym_db.RegisterMessage(Signature)
 
 ColumnMetaData = _reflection.GeneratedProtocolMessageType('ColumnMetaData', (_message.Message,), dict(
   DESCRIPTOR = _COLUMNMETADATA,
   __module__ = 'common_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.ColumnMetaData)
+  # @@protoc_insertion_point(class_scope:pyphoenix.ColumnMetaData)
   ))
 _sym_db.RegisterMessage(ColumnMetaData)
 
 AvaticaType = _reflection.GeneratedProtocolMessageType('AvaticaType', (_message.Message,), dict(
   DESCRIPTOR = _AVATICATYPE,
   __module__ = 'common_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.AvaticaType)
+  # @@protoc_insertion_point(class_scope:pyphoenix.AvaticaType)
   ))
 _sym_db.RegisterMessage(AvaticaType)
 
 AvaticaParameter = _reflection.GeneratedProtocolMessageType('AvaticaParameter', (_message.Message,), dict(
   DESCRIPTOR = _AVATICAPARAMETER,
   __module__ = 'common_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.AvaticaParameter)
+  # @@protoc_insertion_point(class_scope:pyphoenix.AvaticaParameter)
   ))
 _sym_db.RegisterMessage(AvaticaParameter)
 
 CursorFactory = _reflection.GeneratedProtocolMessageType('CursorFactory', (_message.Message,), dict(
   DESCRIPTOR = _CURSORFACTORY,
   __module__ = 'common_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.CursorFactory)
+  # @@protoc_insertion_point(class_scope:pyphoenix.CursorFactory)
   ))
 _sym_db.RegisterMessage(CursorFactory)
 
 Frame = _reflection.GeneratedProtocolMessageType('Frame', (_message.Message,), dict(
   DESCRIPTOR = _FRAME,
   __module__ = 'common_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.Frame)
+  # @@protoc_insertion_point(class_scope:pyphoenix.Frame)
   ))
 _sym_db.RegisterMessage(Frame)
 
 Row = _reflection.GeneratedProtocolMessageType('Row', (_message.Message,), dict(
   DESCRIPTOR = _ROW,
   __module__ = 'common_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.Row)
+  # @@protoc_insertion_point(class_scope:pyphoenix.Row)
   ))
 _sym_db.RegisterMessage(Row)
 
 DatabaseProperty = _reflection.GeneratedProtocolMessageType('DatabaseProperty', (_message.Message,), dict(
   DESCRIPTOR = _DATABASEPROPERTY,
   __module__ = 'common_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.DatabaseProperty)
+  # @@protoc_insertion_point(class_scope:pyphoenix.DatabaseProperty)
   ))
 _sym_db.RegisterMessage(DatabaseProperty)
 
 WireMessage = _reflection.GeneratedProtocolMessageType('WireMessage', (_message.Message,), dict(
   DESCRIPTOR = _WIREMESSAGE,
   __module__ = 'common_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.WireMessage)
+  # @@protoc_insertion_point(class_scope:pyphoenix.WireMessage)
   ))
 _sym_db.RegisterMessage(WireMessage)
 
 ColumnValue = _reflection.GeneratedProtocolMessageType('ColumnValue', (_message.Message,), dict(
   DESCRIPTOR = _COLUMNVALUE,
   __module__ = 'common_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.ColumnValue)
+  # @@protoc_insertion_point(class_scope:pyphoenix.ColumnValue)
   ))
 _sym_db.RegisterMessage(ColumnValue)
 
 TypedValue = _reflection.GeneratedProtocolMessageType('TypedValue', (_message.Message,), dict(
   DESCRIPTOR = _TYPEDVALUE,
   __module__ = 'common_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.TypedValue)
+  # @@protoc_insertion_point(class_scope:pyphoenix.TypedValue)
   ))
 _sym_db.RegisterMessage(TypedValue)
 
 MetaDataOperationArgument = _reflection.GeneratedProtocolMessageType('MetaDataOperationArgument', (_message.Message,), dict(
   DESCRIPTOR = _METADATAOPERATIONARGUMENT,
   __module__ = 'common_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.MetaDataOperationArgument)
+  # @@protoc_insertion_point(class_scope:pyphoenix.MetaDataOperationArgument)
   ))
 _sym_db.RegisterMessage(MetaDataOperationArgument)
 
 QueryState = _reflection.GeneratedProtocolMessageType('QueryState', (_message.Message,), dict(
   DESCRIPTOR = _QUERYSTATE,
   __module__ = 'common_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.QueryState)
+  # @@protoc_insertion_point(class_scope:pyphoenix.QueryState)
   ))
 _sym_db.RegisterMessage(QueryState)
 

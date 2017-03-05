@@ -57,7 +57,7 @@ def connect(url, max_retries=None, **kwargs):
         The maximum number of retries in case there is a connection error.
 
     :returns:
-        :class:`~phoenixdb.connection.Connection` object.
+        :class:`~pyphoenix.connection.Connection` object.
     """
     client = AvaticaClient(url, max_retries=max_retries)
     client.connect()

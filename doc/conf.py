@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# phoenixdb documentation build configuration file, created by
+# pyphoenix documentation build configuration file, created by
 # sphinx-quickstart on Sun Jun 28 18:07:35 2015.
 #
 # This file is execfile()d with the current directory set to its
@@ -220,7 +220,7 @@ htmlhelp_basename = 'pyphoenixdoc'
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 #latex_documents = [
-#  (master_doc, 'phoenixdb.tex', u'phoenixdb Documentation',
+#  (master_doc, 'pyphoenix.tex', u'pyphoenix Documentation',
 #   u'Lukas Lalinsky', 'manual'),
 #]
 

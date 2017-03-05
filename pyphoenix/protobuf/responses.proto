@@ -16,7 +16,7 @@
  */
 syntax = "proto3";
 
-package phoenixdb;
+package pyphoenix;
 
 import "common.proto";
 

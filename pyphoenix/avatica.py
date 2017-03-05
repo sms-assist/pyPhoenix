@@ -35,7 +35,7 @@ AVATICA_CLASS_BASE = "org.apache.calcite.avatica.proto"
 def get_class( kls ):
     """Get class given a fully qualified name of a class"""
     parts = kls.split('$')
-    class_ = getattr(import_module("phoenixdb.responses_pb2"), parts[1])
+    class_ = getattr(import_module("pyphoenix.responses_pb2"), parts[1])
     rv = class_()
     return rv
 

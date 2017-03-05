@@ -28,7 +28,7 @@ logger = logging.getLogger(__name__)
 class Connection(object):
     """Database connection.
     
-    You should not construct this object manually, use :func:`~phoenixdb.connect` instead.
+    You should not construct this object manually, use :func:`~pyphoenix.connect` instead.
     """
 
     def __init__(self, client, **kwargs):
@@ -91,7 +91,7 @@ class Connection(object):
         """Creates a new cursor.
 
         :returns:
-            A :class:`~phoenixdb.cursor.Cursor` object.
+            A :class:`~pyphoenix.cursor.Cursor` object.
         """
         if self._closed:
             raise ProgrammingError('the connection is already closed')

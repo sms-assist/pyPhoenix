@@ -4,7 +4,7 @@ import pyphoenix
 from pyphoenix.tests import TEST_DB_URL
 
 
-@unittest.skipIf(TEST_DB_URL is None, "these tests require the PHOENIXDB_TEST_DB_URL environment variable set to a clean database")
+@unittest.skipIf(TEST_DB_URL is None, "these tests require the pyphoenix_TEST_DB_URL environment variable set to a clean database")
 class PhoenixDatabaseAPI20Test(dbapi20.DatabaseAPI20Test):
     driver = pyphoenix
     connect_args = (TEST_DB_URL, )

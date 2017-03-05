@@ -13,6 +13,6 @@ if args.debug:
     logging.basicConfig(level=logging.DEBUG)
 
 with sqlline.SqlLine() as sqlline:
-    sqlline.connect('phoenixdb', args.url)
+    sqlline.connect('pyphoenix', args.url)
     sqlline.connection.autocommit = True
     sqlline.run()

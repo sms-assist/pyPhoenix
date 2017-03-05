@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='requests.proto',
   package='pyphoenix',
   syntax='proto3',
-  serialized_pb=_b('\n\x0erequests.proto\x12\tphoenixdb\x1a\x0c\x63ommon.proto\"(\n\x0f\x43\x61talogsRequest\x12\x15\n\rconnection_id\x18\x01 \x01(\t\"0\n\x17\x44\x61tabasePropertyRequest\x12\x15\n\rconnection_id\x18\x01 \x01(\t\"P\n\x0eSchemasRequest\x12\x0f\n\x07\x63\x61talog\x18\x01 \x01(\t\x12\x16\n\x0eschema_pattern\x18\x02 \x01(\t\x12\x15\n\rconnection_id\x18\x03 \x01(\t\"\x95\x01\n\rTablesRequest\x12\x0f\n\x07\x63\x61talog\x18\x01 \x01(\t\x12\x16\n\x0eschema_pattern\x18\x02 \x01(\t\x12\x1a\n\x12table_name_pattern\x18\x03 \x01(\t\x12\x11\n\ttype_list\x18\x04 \x03(\t\x12\x15\n\rhas_type_list\x18\x06 \x01(\x08\x12\x15\n\rconnection_id\x18\x07 \x01(\t\"*\n\x11TableTypesRequest\x12\x15\n\rconnection_id\x18\x01 \x01(\t\"\x89\x01\n\x0e\x43olumnsRequest\x12\x0f\n\x07\x63\x61talog\x18\x01 \x01(\t\x12\x16\n\x0eschema_pattern\x18\x02 \x01(\t\x12\x1a\n\x12table_name_pattern\x18\x03 \x01(\t\x12\x1b\n\x13\x63olumn_name_pattern\x18\x04 \x01(\t\x12\x15\n\rconnection_id\x18\x05 \x01(\t\"(\n\x0fTypeInfoRequest\x12\x15\n\rconnection_id\x18\x01 \x01(\t\"\xa1\x01\n\x18PrepareAndExecuteRequest\x12\x15\n\rconnection_id\x18\x01 \x01(\t\x12\x0b\n\x03sql\x18\x02 \x01(\t\x12\x15\n\rmax_row_count\x18\x03 \x01(\x04\x12\x14\n\x0cstatement_id\x18\x04 \x01(\r\x12\x16\n\x0emax_rows_total\x18\x05 \x01(\x03\x12\x1c\n\x14\x66irst_frame_max_size\x18\x06 \x01(\x05\"c\n\x0ePrepareRequest\x12\x15\n\rconnection_id\x18\x01 \x01(\t\x12\x0b\n\x03sql\x18\x02 \x01(\t\x12\x15\n\rmax_row_count\x18\x03 \x01(\x04\x12\x16\n\x0emax_rows_total\x18\x04 \x01(\x03\"\x80\x01\n\x0c\x46\x65tchRequest\x12\x15\n\rconnection_id\x18\x01 \x01(\t\x12\x14\n\x0cstatement_id\x18\x02 \x01(\r\x12\x0e\n\x06offset\x18\x03 \x01(\x04\x12\x1b\n\x13\x66\x65tch_max_row_count\x18\x04 \x01(\r\x12\x16\n\x0e\x66rame_max_size\x18\x05 \x01(\x05\"/\n\x16\x43reateStatementRequest\x12\x15\n\rconnection_id\x18\x01 \x01(\t\"D\n\x15\x43loseStatementRequest\x12\x15\n\rconnection_id\x18\x01 \x01(\t\x12\x14\n\x0cstatement_id\x18\x02 \x01(\r\"\x95\x01\n\x15OpenConnectionRequest\x12\x15\n\rconnection_id\x18\x01 \x01(\t\x12\x38\n\x04info\x18\x02 \x03(\x0b\x32*.phoenixdb.OpenConnectionRequest.InfoEntry\x1a+\n\tInfoEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"/\n\x16\x43loseConnectionRequest\x12\x15\n\rconnection_id\x18\x01 \x01(\t\"c\n\x15\x43onnectionSyncRequest\x12\x15\n\rconnection_id\x18\x01 \x01(\t\x12\x33\n\nconn_props\x18\x02 \x01(\x0b\x32\x1f.phoenixdb.ConnectionProperties\"\xb2\x01\n\x0e\x45xecuteRequest\x12\x33\n\x0fstatementHandle\x18\x01 \x01(\x0b\x32\x1a.phoenixdb.StatementHandle\x12/\n\x10parameter_values\x18\x02 \x03(\x0b\x32\x15.phoenixdb.TypedValue\x12\x1c\n\x14\x66irst_frame_max_size\x18\x03 \x01(\x04\x12\x1c\n\x14has_parameter_values\x18\x04 \x01(\x08\"w\n\x12SyncResultsRequest\x12\x15\n\rconnection_id\x18\x01 \x01(\t\x12\x14\n\x0cstatement_id\x18\x02 \x01(\r\x12$\n\x05state\x18\x03 \x01(\x0b\x32\x15.phoenixdb.QueryState\x12\x0e\n\x06offset\x18\x04 \x01(\x04\"&\n\rCommitRequest\x12\x15\n\rconnection_id\x18\x01 \x01(\t\"(\n\x0fRollbackRequest\x12\x15\n\rconnection_id\x18\x01 \x01(\t\"b\n\x1dPrepareAndExecuteBatchRequest\x12\x15\n\rconnection_id\x18\x01 \x01(\t\x12\x14\n\x0cstatement_id\x18\x02 \x01(\r\x12\x14\n\x0csql_commands\x18\x03 \x03(\t\">\n\x0bUpdateBatch\x12/\n\x10parameter_values\x18\x01 \x03(\x0b\x32\x15.phoenixdb.TypedValue\"k\n\x13\x45xecuteBatchRequest\x12\x15\n\rconnection_id\x18\x01 \x01(\t\x12\x14\n\x0cstatement_id\x18\x02 \x01(\r\x12\'\n\x07updates\x18\x03 \x03(\x0b\x32\x16.phoenixdb.UpdateBatchb\x06proto3')
+  serialized_pb=_b('\n\x0erequests.proto\x12\tpyphoenix\x1a\x0c\x63ommon.proto\"(\n\x0f\x43\x61talogsRequest\x12\x15\n\rconnection_id\x18\x01 \x01(\t\"0\n\x17\x44\x61tabasePropertyRequest\x12\x15\n\rconnection_id\x18\x01 \x01(\t\"P\n\x0eSchemasRequest\x12\x0f\n\x07\x63\x61talog\x18\x01 \x01(\t\x12\x16\n\x0eschema_pattern\x18\x02 \x01(\t\x12\x15\n\rconnection_id\x18\x03 \x01(\t\"\x95\x01\n\rTablesRequest\x12\x0f\n\x07\x63\x61talog\x18\x01 \x01(\t\x12\x16\n\x0eschema_pattern\x18\x02 \x01(\t\x12\x1a\n\x12table_name_pattern\x18\x03 \x01(\t\x12\x11\n\ttype_list\x18\x04 \x03(\t\x12\x15\n\rhas_type_list\x18\x06 \x01(\x08\x12\x15\n\rconnection_id\x18\x07 \x01(\t\"*\n\x11TableTypesRequest\x12\x15\n\rconnection_id\x18\x01 \x01(\t\"\x89\x01\n\x0e\x43olumnsRequest\x12\x0f\n\x07\x63\x61talog\x18\x01 \x01(\t\x12\x16\n\x0eschema_pattern\x18\x02 \x01(\t\x12\x1a\n\x12table_name_pattern\x18\x03 \x01(\t\x12\x1b\n\x13\x63olumn_name_pattern\x18\x04 \x01(\t\x12\x15\n\rconnection_id\x18\x05 \x01(\t\"(\n\x0fTypeInfoRequest\x12\x15\n\rconnection_id\x18\x01 \x01(\t\"\xa1\x01\n\x18PrepareAndExecuteRequest\x12\x15\n\rconnection_id\x18\x01 \x01(\t\x12\x0b\n\x03sql\x18\x02 \x01(\t\x12\x15\n\rmax_row_count\x18\x03 \x01(\x04\x12\x14\n\x0cstatement_id\x18\x04 \x01(\r\x12\x16\n\x0emax_rows_total\x18\x05 \x01(\x03\x12\x1c\n\x14\x66irst_frame_max_size\x18\x06 \x01(\x05\"c\n\x0ePrepareRequest\x12\x15\n\rconnection_id\x18\x01 \x01(\t\x12\x0b\n\x03sql\x18\x02 \x01(\t\x12\x15\n\rmax_row_count\x18\x03 \x01(\x04\x12\x16\n\x0emax_rows_total\x18\x04 \x01(\x03\"\x80\x01\n\x0c\x46\x65tchRequest\x12\x15\n\rconnection_id\x18\x01 \x01(\t\x12\x14\n\x0cstatement_id\x18\x02 \x01(\r\x12\x0e\n\x06offset\x18\x03 \x01(\x04\x12\x1b\n\x13\x66\x65tch_max_row_count\x18\x04 \x01(\r\x12\x16\n\x0e\x66rame_max_size\x18\x05 \x01(\x05\"/\n\x16\x43reateStatementRequest\x12\x15\n\rconnection_id\x18\x01 \x01(\t\"D\n\x15\x43loseStatementRequest\x12\x15\n\rconnection_id\x18\x01 \x01(\t\x12\x14\n\x0cstatement_id\x18\x02 \x01(\r\"\x95\x01\n\x15OpenConnectionRequest\x12\x15\n\rconnection_id\x18\x01 \x01(\t\x12\x38\n\x04info\x18\x02 \x03(\x0b\x32*.pyphoenix.OpenConnectionRequest.InfoEntry\x1a+\n\tInfoEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"/\n\x16\x43loseConnectionRequest\x12\x15\n\rconnection_id\x18\x01 \x01(\t\"c\n\x15\x43onnectionSyncRequest\x12\x15\n\rconnection_id\x18\x01 \x01(\t\x12\x33\n\nconn_props\x18\x02 \x01(\x0b\x32\x1f.pyphoenix.ConnectionProperties\"\xb2\x01\n\x0e\x45xecuteRequest\x12\x33\n\x0fstatementHandle\x18\x01 \x01(\x0b\x32\x1a.pyphoenix.StatementHandle\x12/\n\x10parameter_values\x18\x02 \x03(\x0b\x32\x15.pyphoenix.TypedValue\x12\x1c\n\x14\x66irst_frame_max_size\x18\x03 \x01(\x04\x12\x1c\n\x14has_parameter_values\x18\x04 \x01(\x08\"w\n\x12SyncResultsRequest\x12\x15\n\rconnection_id\x18\x01 \x01(\t\x12\x14\n\x0cstatement_id\x18\x02 \x01(\r\x12$\n\x05state\x18\x03 \x01(\x0b\x32\x15.pyphoenix.QueryState\x12\x0e\n\x06offset\x18\x04 \x01(\x04\"&\n\rCommitRequest\x12\x15\n\rconnection_id\x18\x01 \x01(\t\"(\n\x0fRollbackRequest\x12\x15\n\rconnection_id\x18\x01 \x01(\t\"b\n\x1dPrepareAndExecuteBatchRequest\x12\x15\n\rconnection_id\x18\x01 \x01(\t\x12\x14\n\x0cstatement_id\x18\x02 \x01(\r\x12\x14\n\x0csql_commands\x18\x03 \x03(\t\">\n\x0bUpdateBatch\x12/\n\x10parameter_values\x18\x01 \x03(\x0b\x32\x15.pyphoenix.TypedValue\"k\n\x13\x45xecuteBatchRequest\x12\x15\n\rconnection_id\x18\x01 \x01(\t\x12\x14\n\x0cstatement_id\x18\x02 \x01(\r\x12\'\n\x07updates\x18\x03 \x03(\x0b\x32\x16.pyphoenix.UpdateBatchb\x06proto3')
   ,
   dependencies=[common__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -30,13 +30,13 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 _CATALOGSREQUEST = _descriptor.Descriptor(
   name='CatalogsRequest',
-  full_name='phoenixdb.CatalogsRequest',
+  full_name='pyphoenix.CatalogsRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='connection_id', full_name='phoenixdb.CatalogsRequest.connection_id', index=0,
+      name='connection_id', full_name='pyphoenix.CatalogsRequest.connection_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -61,13 +61,13 @@ _CATALOGSREQUEST = _descriptor.Descriptor(
 
 _DATABASEPROPERTYREQUEST = _descriptor.Descriptor(
   name='DatabasePropertyRequest',
-  full_name='phoenixdb.DatabasePropertyRequest',
+  full_name='pyphoenix.DatabasePropertyRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='connection_id', full_name='phoenixdb.DatabasePropertyRequest.connection_id', index=0,
+      name='connection_id', full_name='pyphoenix.DatabasePropertyRequest.connection_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -92,27 +92,27 @@ _DATABASEPROPERTYREQUEST = _descriptor.Descriptor(
 
 _SCHEMASREQUEST = _descriptor.Descriptor(
   name='SchemasRequest',
-  full_name='phoenixdb.SchemasRequest',
+  full_name='pyphoenix.SchemasRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='catalog', full_name='phoenixdb.SchemasRequest.catalog', index=0,
+      name='catalog', full_name='pyphoenix.SchemasRequest.catalog', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='schema_pattern', full_name='phoenixdb.SchemasRequest.schema_pattern', index=1,
+      name='schema_pattern', full_name='pyphoenix.SchemasRequest.schema_pattern', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='connection_id', full_name='phoenixdb.SchemasRequest.connection_id', index=2,
+      name='connection_id', full_name='pyphoenix.SchemasRequest.connection_id', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -137,48 +137,48 @@ _SCHEMASREQUEST = _descriptor.Descriptor(
 
 _TABLESREQUEST = _descriptor.Descriptor(
   name='TablesRequest',
-  full_name='phoenixdb.TablesRequest',
+  full_name='pyphoenix.TablesRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='catalog', full_name='phoenixdb.TablesRequest.catalog', index=0,
+      name='catalog', full_name='pyphoenix.TablesRequest.catalog', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='schema_pattern', full_name='phoenixdb.TablesRequest.schema_pattern', index=1,
+      name='schema_pattern', full_name='pyphoenix.TablesRequest.schema_pattern', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='table_name_pattern', full_name='phoenixdb.TablesRequest.table_name_pattern', index=2,
+      name='table_name_pattern', full_name='pyphoenix.TablesRequest.table_name_pattern', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='type_list', full_name='phoenixdb.TablesRequest.type_list', index=3,
+      name='type_list', full_name='pyphoenix.TablesRequest.type_list', index=3,
       number=4, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='has_type_list', full_name='phoenixdb.TablesRequest.has_type_list', index=4,
+      name='has_type_list', full_name='pyphoenix.TablesRequest.has_type_list', index=4,
       number=6, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='connection_id', full_name='phoenixdb.TablesRequest.connection_id', index=5,
+      name='connection_id', full_name='pyphoenix.TablesRequest.connection_id', index=5,
       number=7, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -203,13 +203,13 @@ _TABLESREQUEST = _descriptor.Descriptor(
 
 _TABLETYPESREQUEST = _descriptor.Descriptor(
   name='TableTypesRequest',
-  full_name='phoenixdb.TableTypesRequest',
+  full_name='pyphoenix.TableTypesRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='connection_id', full_name='phoenixdb.TableTypesRequest.connection_id', index=0,
+      name='connection_id', full_name='pyphoenix.TableTypesRequest.connection_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -234,41 +234,41 @@ _TABLETYPESREQUEST = _descriptor.Descriptor(
 
 _COLUMNSREQUEST = _descriptor.Descriptor(
   name='ColumnsRequest',
-  full_name='phoenixdb.ColumnsRequest',
+  full_name='pyphoenix.ColumnsRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='catalog', full_name='phoenixdb.ColumnsRequest.catalog', index=0,
+      name='catalog', full_name='pyphoenix.ColumnsRequest.catalog', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='schema_pattern', full_name='phoenixdb.ColumnsRequest.schema_pattern', index=1,
+      name='schema_pattern', full_name='pyphoenix.ColumnsRequest.schema_pattern', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='table_name_pattern', full_name='phoenixdb.ColumnsRequest.table_name_pattern', index=2,
+      name='table_name_pattern', full_name='pyphoenix.ColumnsRequest.table_name_pattern', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='column_name_pattern', full_name='phoenixdb.ColumnsRequest.column_name_pattern', index=3,
+      name='column_name_pattern', full_name='pyphoenix.ColumnsRequest.column_name_pattern', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='connection_id', full_name='phoenixdb.ColumnsRequest.connection_id', index=4,
+      name='connection_id', full_name='pyphoenix.ColumnsRequest.connection_id', index=4,
       number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -293,13 +293,13 @@ _COLUMNSREQUEST = _descriptor.Descriptor(
 
 _TYPEINFOREQUEST = _descriptor.Descriptor(
   name='TypeInfoRequest',
-  full_name='phoenixdb.TypeInfoRequest',
+  full_name='pyphoenix.TypeInfoRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='connection_id', full_name='phoenixdb.TypeInfoRequest.connection_id', index=0,
+      name='connection_id', full_name='pyphoenix.TypeInfoRequest.connection_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -324,48 +324,48 @@ _TYPEINFOREQUEST = _descriptor.Descriptor(
 
 _PREPAREANDEXECUTEREQUEST = _descriptor.Descriptor(
   name='PrepareAndExecuteRequest',
-  full_name='phoenixdb.PrepareAndExecuteRequest',
+  full_name='pyphoenix.PrepareAndExecuteRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='connection_id', full_name='phoenixdb.PrepareAndExecuteRequest.connection_id', index=0,
+      name='connection_id', full_name='pyphoenix.PrepareAndExecuteRequest.connection_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='sql', full_name='phoenixdb.PrepareAndExecuteRequest.sql', index=1,
+      name='sql', full_name='pyphoenix.PrepareAndExecuteRequest.sql', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='max_row_count', full_name='phoenixdb.PrepareAndExecuteRequest.max_row_count', index=2,
+      name='max_row_count', full_name='pyphoenix.PrepareAndExecuteRequest.max_row_count', index=2,
       number=3, type=4, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='statement_id', full_name='phoenixdb.PrepareAndExecuteRequest.statement_id', index=3,
+      name='statement_id', full_name='pyphoenix.PrepareAndExecuteRequest.statement_id', index=3,
       number=4, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='max_rows_total', full_name='phoenixdb.PrepareAndExecuteRequest.max_rows_total', index=4,
+      name='max_rows_total', full_name='pyphoenix.PrepareAndExecuteRequest.max_rows_total', index=4,
       number=5, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='first_frame_max_size', full_name='phoenixdb.PrepareAndExecuteRequest.first_frame_max_size', index=5,
+      name='first_frame_max_size', full_name='pyphoenix.PrepareAndExecuteRequest.first_frame_max_size', index=5,
       number=6, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -390,34 +390,34 @@ _PREPAREANDEXECUTEREQUEST = _descriptor.Descriptor(
 
 _PREPAREREQUEST = _descriptor.Descriptor(
   name='PrepareRequest',
-  full_name='phoenixdb.PrepareRequest',
+  full_name='pyphoenix.PrepareRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='connection_id', full_name='phoenixdb.PrepareRequest.connection_id', index=0,
+      name='connection_id', full_name='pyphoenix.PrepareRequest.connection_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='sql', full_name='phoenixdb.PrepareRequest.sql', index=1,
+      name='sql', full_name='pyphoenix.PrepareRequest.sql', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='max_row_count', full_name='phoenixdb.PrepareRequest.max_row_count', index=2,
+      name='max_row_count', full_name='pyphoenix.PrepareRequest.max_row_count', index=2,
       number=3, type=4, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='max_rows_total', full_name='phoenixdb.PrepareRequest.max_rows_total', index=3,
+      name='max_rows_total', full_name='pyphoenix.PrepareRequest.max_rows_total', index=3,
       number=4, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -442,41 +442,41 @@ _PREPAREREQUEST = _descriptor.Descriptor(
 
 _FETCHREQUEST = _descriptor.Descriptor(
   name='FetchRequest',
-  full_name='phoenixdb.FetchRequest',
+  full_name='pyphoenix.FetchRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='connection_id', full_name='phoenixdb.FetchRequest.connection_id', index=0,
+      name='connection_id', full_name='pyphoenix.FetchRequest.connection_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='statement_id', full_name='phoenixdb.FetchRequest.statement_id', index=1,
+      name='statement_id', full_name='pyphoenix.FetchRequest.statement_id', index=1,
       number=2, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='offset', full_name='phoenixdb.FetchRequest.offset', index=2,
+      name='offset', full_name='pyphoenix.FetchRequest.offset', index=2,
       number=3, type=4, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='fetch_max_row_count', full_name='phoenixdb.FetchRequest.fetch_max_row_count', index=3,
+      name='fetch_max_row_count', full_name='pyphoenix.FetchRequest.fetch_max_row_count', index=3,
       number=4, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='frame_max_size', full_name='phoenixdb.FetchRequest.frame_max_size', index=4,
+      name='frame_max_size', full_name='pyphoenix.FetchRequest.frame_max_size', index=4,
       number=5, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -501,13 +501,13 @@ _FETCHREQUEST = _descriptor.Descriptor(
 
 _CREATESTATEMENTREQUEST = _descriptor.Descriptor(
   name='CreateStatementRequest',
-  full_name='phoenixdb.CreateStatementRequest',
+  full_name='pyphoenix.CreateStatementRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='connection_id', full_name='phoenixdb.CreateStatementRequest.connection_id', index=0,
+      name='connection_id', full_name='pyphoenix.CreateStatementRequest.connection_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -532,20 +532,20 @@ _CREATESTATEMENTREQUEST = _descriptor.Descriptor(
 
 _CLOSESTATEMENTREQUEST = _descriptor.Descriptor(
   name='CloseStatementRequest',
-  full_name='phoenixdb.CloseStatementRequest',
+  full_name='pyphoenix.CloseStatementRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='connection_id', full_name='phoenixdb.CloseStatementRequest.connection_id', index=0,
+      name='connection_id', full_name='pyphoenix.CloseStatementRequest.connection_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='statement_id', full_name='phoenixdb.CloseStatementRequest.statement_id', index=1,
+      name='statement_id', full_name='pyphoenix.CloseStatementRequest.statement_id', index=1,
       number=2, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -570,20 +570,20 @@ _CLOSESTATEMENTREQUEST = _descriptor.Descriptor(
 
 _OPENCONNECTIONREQUEST_INFOENTRY = _descriptor.Descriptor(
   name='InfoEntry',
-  full_name='phoenixdb.OpenConnectionRequest.InfoEntry',
+  full_name='pyphoenix.OpenConnectionRequest.InfoEntry',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='key', full_name='phoenixdb.OpenConnectionRequest.InfoEntry.key', index=0,
+      name='key', full_name='pyphoenix.OpenConnectionRequest.InfoEntry.key', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='value', full_name='phoenixdb.OpenConnectionRequest.InfoEntry.value', index=1,
+      name='value', full_name='pyphoenix.OpenConnectionRequest.InfoEntry.value', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -607,20 +607,20 @@ _OPENCONNECTIONREQUEST_INFOENTRY = _descriptor.Descriptor(
 
 _OPENCONNECTIONREQUEST = _descriptor.Descriptor(
   name='OpenConnectionRequest',
-  full_name='phoenixdb.OpenConnectionRequest',
+  full_name='pyphoenix.OpenConnectionRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='connection_id', full_name='phoenixdb.OpenConnectionRequest.connection_id', index=0,
+      name='connection_id', full_name='pyphoenix.OpenConnectionRequest.connection_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='info', full_name='phoenixdb.OpenConnectionRequest.info', index=1,
+      name='info', full_name='pyphoenix.OpenConnectionRequest.info', index=1,
       number=2, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -645,13 +645,13 @@ _OPENCONNECTIONREQUEST = _descriptor.Descriptor(
 
 _CLOSECONNECTIONREQUEST = _descriptor.Descriptor(
   name='CloseConnectionRequest',
-  full_name='phoenixdb.CloseConnectionRequest',
+  full_name='pyphoenix.CloseConnectionRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='connection_id', full_name='phoenixdb.CloseConnectionRequest.connection_id', index=0,
+      name='connection_id', full_name='pyphoenix.CloseConnectionRequest.connection_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -676,20 +676,20 @@ _CLOSECONNECTIONREQUEST = _descriptor.Descriptor(
 
 _CONNECTIONSYNCREQUEST = _descriptor.Descriptor(
   name='ConnectionSyncRequest',
-  full_name='phoenixdb.ConnectionSyncRequest',
+  full_name='pyphoenix.ConnectionSyncRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='connection_id', full_name='phoenixdb.ConnectionSyncRequest.connection_id', index=0,
+      name='connection_id', full_name='pyphoenix.ConnectionSyncRequest.connection_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='conn_props', full_name='phoenixdb.ConnectionSyncRequest.conn_props', index=1,
+      name='conn_props', full_name='pyphoenix.ConnectionSyncRequest.conn_props', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -714,34 +714,34 @@ _CONNECTIONSYNCREQUEST = _descriptor.Descriptor(
 
 _EXECUTEREQUEST = _descriptor.Descriptor(
   name='ExecuteRequest',
-  full_name='phoenixdb.ExecuteRequest',
+  full_name='pyphoenix.ExecuteRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='statementHandle', full_name='phoenixdb.ExecuteRequest.statementHandle', index=0,
+      name='statementHandle', full_name='pyphoenix.ExecuteRequest.statementHandle', index=0,
       number=1, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='parameter_values', full_name='phoenixdb.ExecuteRequest.parameter_values', index=1,
+      name='parameter_values', full_name='pyphoenix.ExecuteRequest.parameter_values', index=1,
       number=2, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='first_frame_max_size', full_name='phoenixdb.ExecuteRequest.first_frame_max_size', index=2,
+      name='first_frame_max_size', full_name='pyphoenix.ExecuteRequest.first_frame_max_size', index=2,
       number=3, type=4, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='has_parameter_values', full_name='phoenixdb.ExecuteRequest.has_parameter_values', index=3,
+      name='has_parameter_values', full_name='pyphoenix.ExecuteRequest.has_parameter_values', index=3,
       number=4, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
@@ -766,34 +766,34 @@ _EXECUTEREQUEST = _descriptor.Descriptor(
 
 _SYNCRESULTSREQUEST = _descriptor.Descriptor(
   name='SyncResultsRequest',
-  full_name='phoenixdb.SyncResultsRequest',
+  full_name='pyphoenix.SyncResultsRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='connection_id', full_name='phoenixdb.SyncResultsRequest.connection_id', index=0,
+      name='connection_id', full_name='pyphoenix.SyncResultsRequest.connection_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='statement_id', full_name='phoenixdb.SyncResultsRequest.statement_id', index=1,
+      name='statement_id', full_name='pyphoenix.SyncResultsRequest.statement_id', index=1,
       number=2, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='state', full_name='phoenixdb.SyncResultsRequest.state', index=2,
+      name='state', full_name='pyphoenix.SyncResultsRequest.state', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='offset', full_name='phoenixdb.SyncResultsRequest.offset', index=3,
+      name='offset', full_name='pyphoenix.SyncResultsRequest.offset', index=3,
       number=4, type=4, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -818,13 +818,13 @@ _SYNCRESULTSREQUEST = _descriptor.Descriptor(
 
 _COMMITREQUEST = _descriptor.Descriptor(
   name='CommitRequest',
-  full_name='phoenixdb.CommitRequest',
+  full_name='pyphoenix.CommitRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='connection_id', full_name='phoenixdb.CommitRequest.connection_id', index=0,
+      name='connection_id', full_name='pyphoenix.CommitRequest.connection_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -849,13 +849,13 @@ _COMMITREQUEST = _descriptor.Descriptor(
 
 _ROLLBACKREQUEST = _descriptor.Descriptor(
   name='RollbackRequest',
-  full_name='phoenixdb.RollbackRequest',
+  full_name='pyphoenix.RollbackRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='connection_id', full_name='phoenixdb.RollbackRequest.connection_id', index=0,
+      name='connection_id', full_name='pyphoenix.RollbackRequest.connection_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -880,27 +880,27 @@ _ROLLBACKREQUEST = _descriptor.Descriptor(
 
 _PREPAREANDEXECUTEBATCHREQUEST = _descriptor.Descriptor(
   name='PrepareAndExecuteBatchRequest',
-  full_name='phoenixdb.PrepareAndExecuteBatchRequest',
+  full_name='pyphoenix.PrepareAndExecuteBatchRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='connection_id', full_name='phoenixdb.PrepareAndExecuteBatchRequest.connection_id', index=0,
+      name='connection_id', full_name='pyphoenix.PrepareAndExecuteBatchRequest.connection_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='statement_id', full_name='phoenixdb.PrepareAndExecuteBatchRequest.statement_id', index=1,
+      name='statement_id', full_name='pyphoenix.PrepareAndExecuteBatchRequest.statement_id', index=1,
       number=2, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='sql_commands', full_name='phoenixdb.PrepareAndExecuteBatchRequest.sql_commands', index=2,
+      name='sql_commands', full_name='pyphoenix.PrepareAndExecuteBatchRequest.sql_commands', index=2,
       number=3, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -925,13 +925,13 @@ _PREPAREANDEXECUTEBATCHREQUEST = _descriptor.Descriptor(
 
 _UPDATEBATCH = _descriptor.Descriptor(
   name='UpdateBatch',
-  full_name='phoenixdb.UpdateBatch',
+  full_name='pyphoenix.UpdateBatch',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='parameter_values', full_name='phoenixdb.UpdateBatch.parameter_values', index=0,
+      name='parameter_values', full_name='pyphoenix.UpdateBatch.parameter_values', index=0,
       number=1, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -956,27 +956,27 @@ _UPDATEBATCH = _descriptor.Descriptor(
 
 _EXECUTEBATCHREQUEST = _descriptor.Descriptor(
   name='ExecuteBatchRequest',
-  full_name='phoenixdb.ExecuteBatchRequest',
+  full_name='pyphoenix.ExecuteBatchRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='connection_id', full_name='phoenixdb.ExecuteBatchRequest.connection_id', index=0,
+      name='connection_id', full_name='pyphoenix.ExecuteBatchRequest.connection_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='statement_id', full_name='phoenixdb.ExecuteBatchRequest.statement_id', index=1,
+      name='statement_id', full_name='pyphoenix.ExecuteBatchRequest.statement_id', index=1,
       number=2, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='updates', full_name='phoenixdb.ExecuteBatchRequest.updates', index=2,
+      name='updates', full_name='pyphoenix.ExecuteBatchRequest.updates', index=2,
       number=3, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -1032,84 +1032,84 @@ DESCRIPTOR.message_types_by_name['ExecuteBatchRequest'] = _EXECUTEBATCHREQUEST
 CatalogsRequest = _reflection.GeneratedProtocolMessageType('CatalogsRequest', (_message.Message,), dict(
   DESCRIPTOR = _CATALOGSREQUEST,
   __module__ = 'requests_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.CatalogsRequest)
+  # @@protoc_insertion_point(class_scope:pyphoenix.CatalogsRequest)
   ))
 _sym_db.RegisterMessage(CatalogsRequest)
 
 DatabasePropertyRequest = _reflection.GeneratedProtocolMessageType('DatabasePropertyRequest', (_message.Message,), dict(
   DESCRIPTOR = _DATABASEPROPERTYREQUEST,
   __module__ = 'requests_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.DatabasePropertyRequest)
+  # @@protoc_insertion_point(class_scope:pyphoenix.DatabasePropertyRequest)
   ))
 _sym_db.RegisterMessage(DatabasePropertyRequest)
 
 SchemasRequest = _reflection.GeneratedProtocolMessageType('SchemasRequest', (_message.Message,), dict(
   DESCRIPTOR = _SCHEMASREQUEST,
   __module__ = 'requests_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.SchemasRequest)
+  # @@protoc_insertion_point(class_scope:pyphoenix.SchemasRequest)
   ))
 _sym_db.RegisterMessage(SchemasRequest)
 
 TablesRequest = _reflection.GeneratedProtocolMessageType('TablesRequest', (_message.Message,), dict(
   DESCRIPTOR = _TABLESREQUEST,
   __module__ = 'requests_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.TablesRequest)
+  # @@protoc_insertion_point(class_scope:pyphoenix.TablesRequest)
   ))
 _sym_db.RegisterMessage(TablesRequest)
 
 TableTypesRequest = _reflection.GeneratedProtocolMessageType('TableTypesRequest', (_message.Message,), dict(
   DESCRIPTOR = _TABLETYPESREQUEST,
   __module__ = 'requests_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.TableTypesRequest)
+  # @@protoc_insertion_point(class_scope:pyphoenix.TableTypesRequest)
   ))
 _sym_db.RegisterMessage(TableTypesRequest)
 
 ColumnsRequest = _reflection.GeneratedProtocolMessageType('ColumnsRequest', (_message.Message,), dict(
   DESCRIPTOR = _COLUMNSREQUEST,
   __module__ = 'requests_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.ColumnsRequest)
+  # @@protoc_insertion_point(class_scope:pyphoenix.ColumnsRequest)
   ))
 _sym_db.RegisterMessage(ColumnsRequest)
 
 TypeInfoRequest = _reflection.GeneratedProtocolMessageType('TypeInfoRequest', (_message.Message,), dict(
   DESCRIPTOR = _TYPEINFOREQUEST,
   __module__ = 'requests_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.TypeInfoRequest)
+  # @@protoc_insertion_point(class_scope:pyphoenix.TypeInfoRequest)
   ))
 _sym_db.RegisterMessage(TypeInfoRequest)
 
 PrepareAndExecuteRequest = _reflection.GeneratedProtocolMessageType('PrepareAndExecuteRequest', (_message.Message,), dict(
   DESCRIPTOR = _PREPAREANDEXECUTEREQUEST,
   __module__ = 'requests_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.PrepareAndExecuteRequest)
+  # @@protoc_insertion_point(class_scope:pyphoenix.PrepareAndExecuteRequest)
   ))
 _sym_db.RegisterMessage(PrepareAndExecuteRequest)
 
 PrepareRequest = _reflection.GeneratedProtocolMessageType('PrepareRequest', (_message.Message,), dict(
   DESCRIPTOR = _PREPAREREQUEST,
   __module__ = 'requests_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.PrepareRequest)
+  # @@protoc_insertion_point(class_scope:pyphoenix.PrepareRequest)
   ))
 _sym_db.RegisterMessage(PrepareRequest)
 
 FetchRequest = _reflection.GeneratedProtocolMessageType('FetchRequest', (_message.Message,), dict(
   DESCRIPTOR = _FETCHREQUEST,
   __module__ = 'requests_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.FetchRequest)
+  # @@protoc_insertion_point(class_scope:pyphoenix.FetchRequest)
   ))
 _sym_db.RegisterMessage(FetchRequest)
 
 CreateStatementRequest = _reflection.GeneratedProtocolMessageType('CreateStatementRequest', (_message.Message,), dict(
   DESCRIPTOR = _CREATESTATEMENTREQUEST,
   __module__ = 'requests_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.CreateStatementRequest)
+  # @@protoc_insertion_point(class_scope:pyphoenix.CreateStatementRequest)
   ))
 _sym_db.RegisterMessage(CreateStatementRequest)
 
 CloseStatementRequest = _reflection.GeneratedProtocolMessageType('CloseStatementRequest', (_message.Message,), dict(
   DESCRIPTOR = _CLOSESTATEMENTREQUEST,
   __module__ = 'requests_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.CloseStatementRequest)
+  # @@protoc_insertion_point(class_scope:pyphoenix.CloseStatementRequest)
   ))
 _sym_db.RegisterMessage(CloseStatementRequest)
 
@@ -1118,12 +1118,12 @@ OpenConnectionRequest = _reflection.GeneratedProtocolMessageType('OpenConnection
   InfoEntry = _reflection.GeneratedProtocolMessageType('InfoEntry', (_message.Message,), dict(
     DESCRIPTOR = _OPENCONNECTIONREQUEST_INFOENTRY,
     __module__ = 'requests_pb2'
-    # @@protoc_insertion_point(class_scope:phoenixdb.OpenConnectionRequest.InfoEntry)
+    # @@protoc_insertion_point(class_scope:pyphoenix.OpenConnectionRequest.InfoEntry)
     ))
   ,
   DESCRIPTOR = _OPENCONNECTIONREQUEST,
   __module__ = 'requests_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.OpenConnectionRequest)
+  # @@protoc_insertion_point(class_scope:pyphoenix.OpenConnectionRequest)
   ))
 _sym_db.RegisterMessage(OpenConnectionRequest)
 _sym_db.RegisterMessage(OpenConnectionRequest.InfoEntry)
@@ -1131,63 +1131,63 @@ _sym_db.RegisterMessage(OpenConnectionRequest.InfoEntry)
 CloseConnectionRequest = _reflection.GeneratedProtocolMessageType('CloseConnectionRequest', (_message.Message,), dict(
   DESCRIPTOR = _CLOSECONNECTIONREQUEST,
   __module__ = 'requests_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.CloseConnectionRequest)
+  # @@protoc_insertion_point(class_scope:pyphoenix.CloseConnectionRequest)
   ))
 _sym_db.RegisterMessage(CloseConnectionRequest)
 
 ConnectionSyncRequest = _reflection.GeneratedProtocolMessageType('ConnectionSyncRequest', (_message.Message,), dict(
   DESCRIPTOR = _CONNECTIONSYNCREQUEST,
   __module__ = 'requests_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.ConnectionSyncRequest)
+  # @@protoc_insertion_point(class_scope:pyphoenix.ConnectionSyncRequest)
   ))
 _sym_db.RegisterMessage(ConnectionSyncRequest)
 
 ExecuteRequest = _reflection.GeneratedProtocolMessageType('ExecuteRequest', (_message.Message,), dict(
   DESCRIPTOR = _EXECUTEREQUEST,
   __module__ = 'requests_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.ExecuteRequest)
+  # @@protoc_insertion_point(class_scope:pyphoenix.ExecuteRequest)
   ))
 _sym_db.RegisterMessage(ExecuteRequest)
 
 SyncResultsRequest = _reflection.GeneratedProtocolMessageType('SyncResultsRequest', (_message.Message,), dict(
   DESCRIPTOR = _SYNCRESULTSREQUEST,
   __module__ = 'requests_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.SyncResultsRequest)
+  # @@protoc_insertion_point(class_scope:pyphoenix.SyncResultsRequest)
   ))
 _sym_db.RegisterMessage(SyncResultsRequest)
 
 CommitRequest = _reflection.GeneratedProtocolMessageType('CommitRequest', (_message.Message,), dict(
   DESCRIPTOR = _COMMITREQUEST,
   __module__ = 'requests_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.CommitRequest)
+  # @@protoc_insertion_point(class_scope:pyphoenix.CommitRequest)
   ))
 _sym_db.RegisterMessage(CommitRequest)
 
 RollbackRequest = _reflection.GeneratedProtocolMessageType('RollbackRequest', (_message.Message,), dict(
   DESCRIPTOR = _ROLLBACKREQUEST,
   __module__ = 'requests_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.RollbackRequest)
+  # @@protoc_insertion_point(class_scope:pyphoenix.RollbackRequest)
   ))
 _sym_db.RegisterMessage(RollbackRequest)
 
 PrepareAndExecuteBatchRequest = _reflection.GeneratedProtocolMessageType('PrepareAndExecuteBatchRequest', (_message.Message,), dict(
   DESCRIPTOR = _PREPAREANDEXECUTEBATCHREQUEST,
   __module__ = 'requests_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.PrepareAndExecuteBatchRequest)
+  # @@protoc_insertion_point(class_scope:pyphoenix.PrepareAndExecuteBatchRequest)
   ))
 _sym_db.RegisterMessage(PrepareAndExecuteBatchRequest)
 
 UpdateBatch = _reflection.GeneratedProtocolMessageType('UpdateBatch', (_message.Message,), dict(
   DESCRIPTOR = _UPDATEBATCH,
   __module__ = 'requests_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.UpdateBatch)
+  # @@protoc_insertion_point(class_scope:pyphoenix.UpdateBatch)
   ))
 _sym_db.RegisterMessage(UpdateBatch)
 
 ExecuteBatchRequest = _reflection.GeneratedProtocolMessageType('ExecuteBatchRequest', (_message.Message,), dict(
   DESCRIPTOR = _EXECUTEBATCHREQUEST,
   __module__ = 'requests_pb2'
-  # @@protoc_insertion_point(class_scope:phoenixdb.ExecuteBatchRequest)
+  # @@protoc_insertion_point(class_scope:pyphoenix.ExecuteBatchRequest)
   ))
 _sym_db.RegisterMessage(ExecuteBatchRequest)
 
