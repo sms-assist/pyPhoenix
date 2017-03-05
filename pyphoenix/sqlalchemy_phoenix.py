@@ -65,7 +65,7 @@ class PhoenixDialect(DefaultDialect):
         else:
             query = "SELECT DISTINCT TABLE_SCHEM||'.'||table_name FROM system.catalog WHERE TABLE_SCHEM = ? "
             params = [schema.upper()]
-        return connection.execute(query, params) is not None
+        return [row[0] for row in connection.execute(query, params)]
 
     def get_columns(self, connection, table_name, schema=None, **kw):
         if schema is None:
