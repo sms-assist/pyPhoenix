@@ -58,12 +58,16 @@ class PhoenixDialect(DefaultDialect):
             params = [table_name.upper(), schema.upper()]
         return connection.execute(query, params).first() is not None
 
+    def get_schema_names(self, connection, **kw):
+        query = "SELECT DISTINCT TABLE_SCHEM FROM SYSTEM.CATALOG"
+        return [row[0] for row in connection.execute(query)]
+
     def get_table_names(self, connection, schema=None, **kw):
         if schema is None:
-            query = "SELECT DISTINCT TABLE_SCHEM||'.'||table_name FROM system.catalog"
+            query = "SELECT DISTINCT table_name FROM SYSTEM.CATALOG"
             params = []
         else:
-            query = "SELECT DISTINCT TABLE_SCHEM||'.'||table_name FROM system.catalog WHERE TABLE_SCHEM = ? "
+            query = "SELECT DISTINCT table_name FROM SYSTEM.CATALOG WHERE TABLE_SCHEM = ? "
             params = [schema.upper()]
         return [row[0] for row in connection.execute(query, params)]
 
@@ -99,8 +103,7 @@ class PhoenixDialect(DefaultDialect):
                 'name': name,
                 'type': col_type,
                 'nullable': nullable,
-                'default': "",
-                'autoincrement': 'auto',
+                'default': None
             }
 
             cols.append(col_d)

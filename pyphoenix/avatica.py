@@ -32,7 +32,7 @@ logging.basicConfig(level=logging.INFO)
 AVATICA_CLASS_BASE = "org.apache.calcite.avatica.proto"
 
 
-def get_class( kls ):
+def get_class(kls):
     """Get class given a fully qualified name of a class"""
     parts = kls.split('$')
     class_ = getattr(import_module("pyphoenix.responses_pb2"), parts[1])
@@ -53,12 +53,13 @@ def parse_url(url):
 class AvaticaClient(object):
     """Client for Avatica's RPC server."""
 
-    def __init__(self, url, max_retries=None, timeout=None):
+    def __init__(self, url, max_retries=None, timeout=None, autocommit=None, readonly=None,):
         self.url = parse_url(url)
         self.max_retries = max_retries if max_retries is not None else 3
         self.connection = None
+        self.autocommit = autocommit
+        self.readonly = readonly
         self.timeout = timeout if timeout is not None else 100000
-
 
     def connect(self):
         """Opens a HTTP connection to the RPC server."""
@@ -75,7 +76,7 @@ class AvaticaClient(object):
             logger.debug("Closing connection to %s:%s", self.url.hostname, self.url.port)
             try:
                 self.connection.close()
-            except httplib.HTTPException as e:
+            except httplib.HTTPException:
                 logger.warning("Error while closing connection", exc_info=True)
             self.connection = None
 
@@ -90,20 +91,18 @@ class AvaticaClient(object):
         response = self._post_request(body, headers)
         response_body = response.read()
 
-        #deserialize WireMessage
+        # deserialize WireMessage
         wire_message = WireMessage()
         wire_message.ParseFromString(response_body)
 
-        #deserialize respnse
+        # deserialize response
         response = get_class(wire_message.name)
         response.ParseFromString(wire_message.wrapped_message)
 
-        if(type(response) is ErrorResponse):
-            raise errors.InterfaceError(response.error_message, code=response.error_code, sqlstate=response.sql_state, cause=response.exceptions)
-
-
+        if type(response) is ErrorResponse:
+            raise errors.InterfaceError(response.error_message, code=response.error_code, sqlstate=response.sql_state,
+                                        cause=response.exceptions)
         return response
-
 
     def _post_request(self, body, headers):
         retry_count = self.max_retries

@@ -41,7 +41,7 @@ For example::
 """
 
 
-def connect(url, max_retries=None, **kwargs):
+def connect(url, max_retries=None, autocommit=None, readonly=None, **kwargs):
     """Connects to a Phoenix query server.
 
     :param url:
@@ -59,6 +59,6 @@ def connect(url, max_retries=None, **kwargs):
     :returns:
         :class:`~pyphoenix.connection.Connection` object.
     """
-    client = AvaticaClient(url, max_retries=max_retries)
+    client = AvaticaClient(url, max_retries=max_retries, autocommit=autocommit, readonly=readonly)
     client.connect()
     return Connection(client, **kwargs)
