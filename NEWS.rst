@@ -1,6 +1,11 @@
 Changelog
 =========
 
+Version 0.10
+-----------
+
+- add sqlachemy
+
 Version 0.6
 -----------
 

@@ -12,7 +12,7 @@ def readme():
     with open('README.rst') as f:
         return f.read()
 
-version = "0.6"
+version = "0.9.1"
 
 setup(
     name="pyPhoenix",
@@ -22,15 +22,22 @@ setup(
     author="Dimitri Capitaine",
     author_email="grytes29@gmail.com",
     url="https://github.com/Pirionfr/pyPhoenix",
-    license="Apache 2",
+    license="MIT",
     packages=find_packages(),
     include_package_data=True,
     cmdclass=cmdclass,
-    install_requires=['protobuf'],
+    zip_safe=False,
+    install_requires=['protobuf','sqlalchemy'],
     command_options={
         'build_sphinx': {
             'version': ('setup.py', version),
             'release': ('setup.py', version),
         },
+    },
+
+    entry_points={
+        "sqlalchemy.dialects": [
+            "phoenix = pyphoenix.sqlalchemy_phoenix:PhoenixDialect"
+        ]
     },
 )

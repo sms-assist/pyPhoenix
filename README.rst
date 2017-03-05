@@ -9,6 +9,11 @@ in Phoenix 4.4.  The library implements the
 standard `DB API 2.0 <https://www.python.org/dev/peps/pep-0249/>`_ interface,
 which should be familiar to most Python programmers.
 
+SQLachemy
+===================================
+- Creates versions for select
+- select over queryserver with pyphoenix
+
 Installation
 ------------
 
