@@ -8,11 +8,8 @@ using the
 in Phoenix 4.4.  The library implements the  
 standard `DB API 2.0 <https://www.python.org/dev/peps/pep-0249/>`_ interface,
 which should be familiar to most Python programmers.
+It include sqlachemy plugins.
 
-SQLachemy
-===================================
-- Creates versions for select
-- select over queryserver with pyphoenix
 
 Installation
 ------------
@@ -114,3 +111,19 @@ Known issues
 - TIMESTAMP columns in Phoenix are stored with a nanosecond accuracy, but the remote protocol truncates them to milliseconds. (`CALCITE-796 <https://issues.apache.org/jira/browse/CALCITE-796>`_)
 - ARRAY columns are not supported.
   (`CALCITE-1050 <https://issues.apache.org/jira/browse/CALCITE-1050>`_, `PHOENIX-2585 <https://issues.apache.org/jira/browse/PHOENIX-2585>`_)
+
+SQLachemy
+===================================
+- Creates versions for select
+- select over queryserver with pyphoenix
+
+Usage
+-----
+
+example::
+
+    import sqlalchemy
+
+    db = sqlalchemy.create_engine('phoenix://localhost:8765/')
+    conn = db.connect()
+
