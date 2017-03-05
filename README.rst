@@ -14,7 +14,7 @@ Installation
 
 The easiest way to install the library is using `pip <https://pip.pypa.io/en/stable/>`_::
 
-    pip install pyphoenix
+    pip install pyPhoenix
 
 You can also download the source code and install it manually::
 
