@@ -1,5 +1,5 @@
-import urlparse
-import urllib
+import urllib.parse
+import urllib.request, urllib.parse, urllib.error
 import pyphoenix
 
 from sqlalchemy.engine.default import DefaultDialect
@@ -34,11 +34,11 @@ class PhoenixDialect(DefaultDialect):
         return pyphoenix
 
     def create_connect_args(self, url):
-        phoenix_url = urlparse.urlunsplit(urlparse.SplitResult(
+        phoenix_url = urllib.parse.urlunsplit(urllib.parse.SplitResult(
             scheme='http',
             netloc='{}:{}'.format(url.host, url.port or 8765),
             path='/',
-            query=urllib.urlencode(url.query),
+            query=urllib.parse.urlencode(url.query),
             fragment='',
         ))
         return [phoenix_url], {'autocommit': True}
