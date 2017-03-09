@@ -218,6 +218,7 @@ class Cursor(object):
 
 
     def fetchone(self):
+        print "machin chose"
         print("fetchone")
         result_row = []
         if self._frame is None:
