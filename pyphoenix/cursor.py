@@ -228,10 +228,8 @@ class Cursor(object):
         self._pos += 1
         if self._pos >= len(rows):
             self._pos = None
-            print('self._pos >= len(rows)')
-            self._fetch_next_frame()
-            # if not self._frame.done:
-            #     self._fetch_next_frame()
+            if not self._frame.done:
+                self._fetch_next_frame()
         for value, data_type in zip(row.value, self._column_data_types):
             if value.scalar_value.null:
                 result_row.append(None)
