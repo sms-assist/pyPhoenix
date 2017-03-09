@@ -226,6 +226,7 @@ class Cursor(object):
         rows = self._frame.rows
         row = rows[self._pos]
         self._pos += 1
+        print(self._frame.done)
         if self._pos >= len(rows):
             self._pos = None
             if not self._frame.done:
