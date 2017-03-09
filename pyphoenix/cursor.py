@@ -218,7 +218,6 @@ class Cursor(object):
 
 
     def fetchone(self):
-        print("fetchone")
         result_row = []
         if self._frame is None:
             raise ProgrammingError('no select statement was executed')
@@ -227,11 +226,12 @@ class Cursor(object):
         rows = self._frame.rows
         row = rows[self._pos]
         self._pos += 1
-        print(self._frame.done)
         if self._pos >= len(rows):
             self._pos = None
-            if not self._frame.done:
-                self._fetch_next_frame()
+            print('self._pos >= len(rows)')
+            self._fetch_next_frame()
+            # if not self._frame.done:
+            #     self._fetch_next_frame()
         for value, data_type in zip(row.value, self._column_data_types):
             if value.scalar_value.null:
                 result_row.append(None)
