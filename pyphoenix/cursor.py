@@ -200,7 +200,7 @@ class Cursor(object):
             self._set_id(statement.id)
             self._set_signature(statement.signature)
             results = self._connection._client.execute(self._connection._id, self._id,self._signature,
-                    self._transform_parameters(parameters), maxRowCount=-1)
+                    self._transform_parameters(parameters), maxRowCount=self.itersize)
             self._process_results(results)
 
 
@@ -209,12 +209,12 @@ class Cursor(object):
             raise ProgrammingError('the cursor is already closed')
         self._updatecount = -1
         self._set_frame(None)
-        statement = self._connection._client.prepare(self._connection._id, operation, maxRowCount=0)
+        statement = self._connection._client.prepare(self._connection._id, operation, maxRowCount=-1)
         self._set_id(statement.id)
         self._set_signature(statement.signature)
         for parameters in seq_of_parameters:
             self._connection._client.execute(self._connection._id, self._id, self._transform_parameters(parameters),
-                    maxRowCount=0)
+                    maxRowCount=self.itersize)
 
 
     def fetchone(self):
