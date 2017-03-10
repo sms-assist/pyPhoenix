@@ -12,7 +12,7 @@ def readme():
     with open('README.rst') as f:
         return f.read()
 
-version = "0.9.3"
+version = "0.9.4"
 
 setup(
     name="pyPhoenix",
