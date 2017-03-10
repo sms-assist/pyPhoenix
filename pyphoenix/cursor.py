@@ -192,15 +192,15 @@ class Cursor(object):
             if self._id is None:
                 self._set_id(self._connection._client.createStatement(self._connection._id))
             results = self._connection._client.prepareAndExecute(self._connection._id, self._id,
-                operation, maxRowCount=self.itersize)
+                operation, maxRowCount=-1)
             self._process_results(results)
         else:
             statement = self._connection._client.prepare(self._connection._id,
-                operation, maxRowCount=self.itersize)
+                operation, maxRowCount=-1)
             self._set_id(statement.id)
             self._set_signature(statement.signature)
             results = self._connection._client.execute(self._connection._id, self._id,self._signature,
-                    self._transform_parameters(parameters), maxRowCount=self.itersize)
+                    self._transform_parameters(parameters), maxRowCount=-1)
             self._process_results(results)
 
 
