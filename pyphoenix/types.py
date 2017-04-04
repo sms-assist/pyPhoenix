@@ -15,7 +15,7 @@
 import time
 import datetime
 import base64
-from common_pb2 import Rep
+from .common_pb2 import Rep
 
 __all__ = [
     'Date', 'Time', 'Timestamp', 'DateFromTicks', 'TimeFromTicks', 'TimestampFromTicks',

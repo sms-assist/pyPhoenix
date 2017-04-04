@@ -2,3 +2,4 @@
 sqlalchemy
 nose
 protobuf
+future

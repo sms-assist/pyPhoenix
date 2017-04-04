@@ -18,7 +18,7 @@ import weakref
 from pyphoenix import errors
 from pyphoenix.cursor import Cursor
 from pyphoenix.errors import ProgrammingError
-from common_pb2 import ConnectionProperties
+from .common_pb2 import ConnectionProperties
 
 __all__ = ['Connection']
 

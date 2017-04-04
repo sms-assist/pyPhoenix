@@ -15,8 +15,8 @@
 import logging
 import collections
 from pyphoenix.errors import InternalError, ProgrammingError
-from common_pb2 import Rep, TypedValue
-from types import javaTypetoNative
+from .common_pb2 import Rep, TypedValue
+from .types import javaTypetoNative
 
 __all__ = ['Cursor', 'ColumnDescription']
 

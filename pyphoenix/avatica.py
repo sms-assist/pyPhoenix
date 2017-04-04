@@ -11,14 +11,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+from future.standard_library import install_aliases
+install_aliases()
 
-from requests_pb2 import *
-from common_pb2 import *
-from responses_pb2 import *
-import urlparse
+from .requests_pb2 import *
+from .common_pb2 import *
+from .responses_pb2 import *
+import urllib.parse
 import logging
 import socket
-import httplib
+# import httplib
+import http.client
 from pyphoenix import errors
 import math
 import time
@@ -41,12 +44,12 @@ def get_class(kls):
 
 
 def parse_url(url):
-    url = urlparse.urlparse(url)
+    url = urllib.parse.urlparse(url)
     if not url.scheme and not url.netloc and url.path:
         netloc = url.path
         if ':' not in netloc:
             netloc = '{}:8765'.format(netloc)
-        return urlparse.ParseResult('http', netloc, '/', '', '', '')
+        return urllib.parse.ParseResult('http', netloc, '/', '', '', '')
     return url
 
 
@@ -65,9 +68,9 @@ class AvaticaClient(object):
         """Opens a HTTP connection to the RPC server."""
         logger.debug("Opening connection to %s:%s", self.url.hostname, self.url.port)
         try:
-            self.connection = httplib.HTTPConnection(self.url.hostname, self.url.port)
+            self.connection = http.client.HTTPConnection(self.url.hostname, self.url.port)
             self.connection.connect()
-        except (httplib.HTTPException, socket.error) as e:
+        except (http.client.HTTPException, socket.error) as e:
             raise errors.InterfaceError('Unable to connect to the specified service', e)
 
     def close(self):
@@ -76,7 +79,7 @@ class AvaticaClient(object):
             logger.debug("Closing connection to %s:%s", self.url.hostname, self.url.port)
             try:
                 self.connection.close()
-            except httplib.HTTPException:
+            except http.client.HTTPException:
                 logger.warning("Error while closing connection", exc_info=True)
             self.connection = None
 
@@ -111,7 +114,7 @@ class AvaticaClient(object):
             try:
                 self.connection.request('POST', self.url.path, body=body, headers=headers)
                 response = self.connection.getresponse()
-            except httplib.HTTPException as e:
+            except http.client.HTTPException as e:
                 if retry_count > 0:
                     delay = math.exp(-retry_count)
                     logger.debug("HTTP protocol error, will retry in %s seconds...", delay, exc_info=True)
@@ -122,7 +125,7 @@ class AvaticaClient(object):
                     continue
                 raise errors.InterfaceError('RPC request failed', cause=e)
             else:
-                if response.status == httplib.SERVICE_UNAVAILABLE:
+                if response.status == http.client.SERVICE_UNAVAILABLE:
                     if retry_count > 0:
                         delay = math.exp(-retry_count)
                         logger.debug("Service unavailable, will retry in %s seconds...", delay, exc_info=True)
@@ -195,13 +198,13 @@ class AvaticaClient(object):
         request = PrepareAndExecuteRequest(connection_id=connectionId,
                                                         statement_id=statementId,
                                                         sql=sql,
-                                                        max_rows_total=long(maxRowCount))
+                                                        max_rows_total=maxRowCount)
         return self._apply(request).results
 
     def prepare(self, connectionId, sql, maxRowCount=-1):
         request = PrepareRequest(connection_id=connectionId,
                                                         sql=sql,
-                                                        max_rows_total=long(maxRowCount))
+                                                        max_rows_total=maxRowCount)
         return self._apply(request).statement
 
     def execute(self, connectionId, statementId, signature, parameterValues=None, maxRowCount=-1):
