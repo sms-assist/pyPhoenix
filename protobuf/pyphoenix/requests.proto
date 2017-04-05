@@ -18,7 +18,7 @@ syntax = "proto3";
 
 package pyphoenix;
 
-import "common.proto";
+import "pyphoenix/common.proto";
 
 // Request for Meta#getCatalogs()
 message CatalogsRequest {

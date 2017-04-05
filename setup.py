@@ -27,7 +27,7 @@ setup(
     include_package_data=True,
     cmdclass=cmdclass,
     zip_safe=False,
-    install_requires=['protobuf','sqlalchemy'],
+    install_requires=['protobuf','sqlalchemy', 'future'],
     command_options={
         'build_sphinx': {
             'version': ('setup.py', version),

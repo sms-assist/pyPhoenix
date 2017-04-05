@@ -18,7 +18,7 @@ syntax = "proto3";
 
 package pyphoenix;
 
-import "common.proto";
+import "pyphoenix/common.proto";
 
 // Response that contains a result set.
 message ResultSetResponse {
